@@ -1,0 +1,42 @@
+.content{
+    margin-left: 200px;
+    width: 1000px;
+    display: inline-block;
+}
+
+.sideBar{
+    width: 220px;
+    float: right;
+    margin-top: 12px;
+    margin-right: 100px;
+    display: inline-block;
+}
+
+.sideBar Button{
+    background-color: white !important;
+    color: black !important;
+    margin-left: 20px;
+}
+
+.register-button{
+    background-color: white !important;
+    color: black !important;
+    margin-left: 30px;
+}
+
+ .login-form {
+    max-width: 300px;
+}
+
+.login-form-forgot {
+    float: right;
+}
+
+.login-form-button {
+    width: 100%;
+}
+
+.register-form-button {
+    width: 100%;
+    margin-top: 30px;
+}
