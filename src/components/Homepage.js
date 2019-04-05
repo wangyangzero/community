@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
-import { Tabs, Icon,Tooltip,Modal,Button, Form, Input,Checkbox, Cascader, Select, Row, Col, AutoComplete,} from 'antd';
+import { Tabs, Icon,Tooltip,Modal,Button, Form, Input,Checkbox,} from 'antd';
 import 'antd/dist/antd.css';
 import './Homepage.css'
-
+import './HeadPage'
+import HeadPage from "./HeadPage";
 const TabPane = Tabs.TabPane;
 
 
@@ -14,6 +15,7 @@ class Homepage extends Component{
         this.state = {
             loginModal: false,
             registerModal:false,
+            confirmDirty: false,
         }
     }
     /**
@@ -25,7 +27,7 @@ class Homepage extends Component{
         });
     }
     /**
-     * 显示登录对话框
+     * 显示注册对话框
      */
     showRegisterModal = () => {
         this.setState({
@@ -53,6 +55,42 @@ class Homepage extends Component{
             registerModal:false,
         });
     }
+    /**
+     * 将第二次的密码与第一次的进行比较
+     * @param rule
+     * @param value
+     * @param callback
+     */
+    compareToFirstPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && value !== form.getFieldValue('密码')) {
+            callback('两次输入的密码不一致');
+        } else {
+            callback();
+        }
+    }
+    /**
+     * 校验并获取第一次密码输入域的值
+     * @param rule
+     * @param value
+     * @param callback
+     */
+    validateToNextPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && this.state.confirmDirty) {
+            form.validateFields(['confirm'], { force: true });
+        }
+        callback();
+    }
+    /**
+     * 时刻更新两次密码比较的结果
+     * @param e
+     */
+    handleConfirmBlur = (e) => {
+        const value = e.target.value;
+        this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+    }
+
     render(){
         const { getFieldDecorator } = this.props.form;
         return(
@@ -60,7 +98,8 @@ class Homepage extends Component{
                 <div className="content">
                     <Tabs defaultActiveKey="1" tabBarGutter={0} className="interface">
                         <TabPane tab={<span><Icon type="home" />Swust程序交流社区</span>} key="1">
-                            首页
+                            <h4>板块</h4>
+                            <HeadPage/>
                         </TabPane>
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"资源共享"} >
@@ -101,6 +140,7 @@ class Homepage extends Component{
                     <Button type="primary" onClick={this.showRegisterModal}className="register-button">
                         注册
                     </Button>
+                    <h4 className={"message"}>最新留言</h4>
                     <Modal
                         title="登录"
                         visible={this.state.loginModal}
@@ -114,29 +154,29 @@ class Homepage extends Component{
                                 {getFieldDecorator('用户名', {
                                     rules: [{ required: true, message: '请输入您的用户名!' }],
                                 })(
-                                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
+                                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                           placeholder="用户名" />
                                 )}
                             </Form.Item>
                             <Form.Item>
                                 {getFieldDecorator('密码', {
                                     rules: [{ required: true, message: '请输入您的密码!' }],
                                 })(
-                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
+                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                           type="password" placeholder="密码" />
                                 )}
                             </Form.Item>
                             <Form.Item>
-                                {getFieldDecorator('remember', {
+                                {getFieldDecorator('记住我', {
                                     valuePropName: 'checked',
                                     initialValue: true,
                                 })(
                                     <Checkbox>记住我</Checkbox>
                                 )}
-                                <a className="login-form-forgot" href="">忘记密码</a>
-                                <Button type="primary" htmlType="submit" className="login-form-button" onClick={this.handleLogin}>
+                                <a className="login-form-forgot">忘记密码</a>
+                                <Button type="primary" htmlType="submit" className="login-form-button"
+                                        onClick={this.handleLogin}>
                                    登录
-                                </Button>
-                                <Button type="primary" htmlType="submit" className="register-form-button" onClick={this.handleRegister}>
-                                    注册
                                 </Button>
                             </Form.Item>
                         </Form>
@@ -154,25 +194,47 @@ class Homepage extends Component{
                                 {getFieldDecorator('用户名', {
                                     rules: [{ required: true, message: '请输入您的用户名!' }],
                                 })(
-                                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
+                                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                           placeholder="用户名" />
+                                )}
+                            </Form.Item>
+                            <Form.Item>
+                                {getFieldDecorator('真实姓名', {
+                                    rules: [{ required: true, message: '请输入您的真实姓名!' }],
+                                })(
+                                    <Input prefix={<Icon type="robot" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                           placeholder="真实姓名" />
+                                )}
+                            </Form.Item>
+                            <Form.Item>
+                                {getFieldDecorator('学号', {
+                                    rules: [{ required: true, message: '请输入您的学号!' }],
+                                })(
+                                    <Input prefix={<Icon type="solution" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                           placeholder="学号" />
                                 )}
                             </Form.Item>
                             <Form.Item>
                                 {getFieldDecorator('密码', {
-                                    rules: [{ required: true, message: '请输入您的密码!' }],
+                                    rules: [{ required: true, message: '请输入您的密码!' },
+                                        { validator: this.validateToNextPassword,}],
                                 })(
-                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
+                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                           type="password" placeholder="密码" />
                                 )}
                             </Form.Item>
                             <Form.Item>
-                                {getFieldDecorator('remember', {
-                                    valuePropName: 'checked',
-                                    initialValue: true,
+                                {getFieldDecorator('确认密码', {
+                                    rules: [{ required: true, message: '请确认您的密码!' },{
+                                        validator: this.compareToFirstPassword,}],
                                 })(
-                                    <Checkbox>记住我</Checkbox>
+                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                           type="password" placeholder="请确认密码" onBlur={this.handleConfirmBlur}/>
                                 )}
-                                <a className="login-form-forgot" href="">忘记密码</a>
-                                <Button type="primary" htmlType="submit" className="register-form-button" onClick={this.handleRegister}>
+                            </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit" className="register-form-button"
+                                        onClick={this.handleRegister}>
                                     注册
                                 </Button>
                             </Form.Item>
@@ -184,5 +246,5 @@ class Homepage extends Component{
     }
 }
 
-const WrappedNormalLoginForm = Form.create()(Homepage);
+
 export default Form.create()(Homepage);
