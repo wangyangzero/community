@@ -125,12 +125,6 @@ class Homepage extends Component{
 
         return(
             <div>
-                <div className={"logo1"}>
-                <Tooltip placement = "top" title={"back to oj"} >
-                    <a href={"http://acm.swust.edu.cn"}>
-                        <img src={"https://i.loli.net/2019/04/06/5ca83355d761e.jpg" } alt={"back to oj"} /></a>
-                </Tooltip>
-                </div>
                 <div className="content">
                     <Tabs defaultActiveKey="1" tabBarGutter={0} className="interface">
                         <TabPane tab={<span><Icon type="home" />Swust程序交流社区</span>} key="1">

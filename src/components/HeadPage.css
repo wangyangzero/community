@@ -1,0 +1,62 @@
+.photo{
+    width: 500px;
+    height: 300px;
+}
+.carousel{
+    width: 500px;
+    height: 300px;
+    float: left;
+}
+
+.side{
+    width: 480px;
+    height: 300px;
+    margin-left: 20px;
+    float: left;
+}
+
+.side h3{
+    margin-left: 125px;
+}
+
+.side div{
+    margin-left: 5px;
+}
+.side div a{
+    font-size: 12px;
+}
+
+.footer{
+    width: 1000px;
+    margin-top: 25px;
+    display: inline-block;
+}
+.footer h3{
+    margin-left: 500px;
+}
+
+a:visited{color:black;}
+
+a:hover{color:skyblue;}
+
+a:active{color:#ccc;}
+
+#website1{
+    margin-top: 10px;
+}
+
+#website2{
+    margin-top: 15px;
+}
+
+#website3{
+    margin-top: 15px;
+}
+
+#website4{
+    margin-top: 15px;
+}
+
+#website5{
+    margin-top: 15px;
+}
