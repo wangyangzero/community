@@ -1,13 +1,10 @@
 import React,{Component} from 'react';
-import { Tabs, Icon,Tooltip,Modal,Button, Form, Input,Checkbox,} from 'antd';
+import { Tabs, Icon,Tooltip,Modal,Button, Form, Input,Checkbox,List,Avatar} from 'antd';
 import 'antd/dist/antd.css';
 import './Homepage.css'
-import './HeadPage'
-import HeadPage from "./HeadPage";
+import Plate from "./Plate";
+import HeadPage from './HeadPage'
 const TabPane = Tabs.TabPane;
-
-
-
 
 class Homepage extends Component{
     constructor(props){
@@ -93,17 +90,55 @@ class Homepage extends Component{
 
     render(){
         const { getFieldDecorator } = this.props.form;
+        const data = [
+            {
+                time: '2019/4/6',
+                link:"",
+                avatar:"https://i.loli.net/2019/04/06/5ca88103c0bca.jpg",
+                content:"你也可以使用WaterFallList实现，看Readme和examples就知道了 ，还有效果图",
+            },
+            {
+                time: '2019/4/5',
+                link:"",
+                avatar:"https://i.loli.net/2019/04/06/5ca88104017ab.jpg",
+                content:"初学者不要自己配置 开发环境, 直接从 expo开始, 这样会简单很多.",
+            },
+            {
+                time: '2019/4/4',
+                link:"",
+                avatar:"https://i.loli.net/2019/04/06/5ca88104980da.jpg",
+                content:" 确实是jdk的版本关系，你echo %JAVA_HOME%看一下版本",
+            },
+            {
+                time: '2019/4/3',
+                link:"",
+                avatar:"https://i.loli.net/2019/04/06/5ca881051c6a7.jpg",
+                content:"你是怎么解决的,我试了很多次都不能成功",
+            },
+            {
+                time: '2019/4/2',
+                link:"",
+                avatar:"https://i.loli.net/2019/04/06/5ca88294c3415.jpg",
+                content:"如何在android原生端获取到react native中的某个view",
+            },
+        ];
+
         return(
             <div>
+                <div className={"logo1"}>
+                <Tooltip placement = "top" title={"back to oj"} >
+                    <a href={"http://acm.swust.edu.cn"}>
+                        <img src={"https://i.loli.net/2019/04/06/5ca83355d761e.jpg" } alt={"back to oj"} /></a>
+                </Tooltip>
+                </div>
                 <div className="content">
                     <Tabs defaultActiveKey="1" tabBarGutter={0} className="interface">
                         <TabPane tab={<span><Icon type="home" />Swust程序交流社区</span>} key="1">
-                            <h4>板块</h4>
                             <HeadPage/>
                         </TabPane>
                         <TabPane tab={
-                        <span><Tooltip placement = "bottom" title={"资源共享"} >
-                        <span><Icon type="folder" /></span>
+                        <span><Tooltip placement = "bottom" title={"博客"} >
+                        <span><Icon type="read" /></span>
                         </Tooltip>
                         </span>} key="2">
                         </TabPane>
@@ -112,6 +147,8 @@ class Homepage extends Component{
                         <span><Icon type="menu-fold" /></span>
                         </Tooltip>
                         </span>} key="3">
+                            <h4>板块</h4>
+                            <Plate/>
                         </TabPane>
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"最新"} >
@@ -134,13 +171,30 @@ class Homepage extends Component{
                     </Tabs>
                 </div>
                 <div className="sideBar">
+                    <Tooltip placement = "top" title={"fork me on the Github"} >
+                        <a href={"https://github.com/LazyCaty/community"}>
+                            <img src={"https://i.loli.net/2019/04/06/5ca836d6cc365.jpg"} alt={"Github"} className={"logo2"}/></a>
+                    </Tooltip>
                     <Button type="primary" onClick={this.showLoginModal}>
                         登录
                     </Button>
                     <Button type="primary" onClick={this.showRegisterModal}className="register-button">
                         注册
                     </Button>
-                    <h4 className={"message"}>最新留言</h4>
+                    <div id={"upToDateMessage"}><h4 className={"message"}>最新留言</h4></div>
+                    <List
+                        itemLayout="horizontal"
+                        dataSource={data}
+                        renderItem={item => (
+                            <List.Item>
+                                <List.Item.Meta
+                                    avatar={<Avatar src={item.avatar} />}
+                                    title={<a href={item.link}>{item.time}</a>}
+                                    description={item.content}
+                                />
+                            </List.Item>
+                        )}
+                    />
                     <Modal
                         title="登录"
                         visible={this.state.loginModal}
@@ -173,7 +227,7 @@ class Homepage extends Component{
                                 })(
                                     <Checkbox>记住我</Checkbox>
                                 )}
-                                <a className="login-form-forgot">忘记密码</a>
+                                <a className="login-form-forgot" href={"www.baidu.com"}>忘记密码</a>
                                 <Button type="primary" htmlType="submit" className="login-form-button"
                                         onClick={this.handleLogin}>
                                    登录

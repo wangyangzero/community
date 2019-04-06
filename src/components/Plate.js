@@ -1,33 +1,34 @@
 import React,{Component} from 'react';
 import { List, Avatar } from 'antd';
-
-const data = [
-    {
-        title: '资源共享',
-        avatar:"https://i.loli.net/2019/04/05/5ca73a7555151.jpg",
-    },
-    {
-        title: '问题求助',
-        avatar:"https://i.loli.net/2019/04/05/5ca73d1c3ac8a.jpg",
-    },
-    {
-        title: '技术讨论',
-        avatar:"https://i.loli.net/2019/04/05/5ca73d1d864e3.jpg",
-    },
-    {
-        title: '实验室板块',
-        avatar:"https://i.loli.net/2019/04/05/5ca73d2207d3c.jpg",
-    },
-];
+import './Plate.css'
 
 
-class HeadPage extends Component {
+
+class Plate extends Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
 
     render() {
+        const data = [
+            {
+                title: '资源共享',
+                avatar:"https://i.loli.net/2019/04/05/5ca73a7555151.jpg",
+            },
+            {
+                title: '问题求助',
+                avatar:"https://i.loli.net/2019/04/05/5ca73d1c3ac8a.jpg",
+            },
+            {
+                title: '技术讨论',
+                avatar:"https://i.loli.net/2019/04/05/5ca73d1d864e3.jpg",
+            },
+            {
+                title: '实验室板块',
+                avatar:"https://i.loli.net/2019/04/05/5ca73d2207d3c.jpg",
+            },
+        ];
         return (
             <List
                 itemLayout="horizontal"
@@ -46,4 +47,4 @@ class HeadPage extends Component {
     }
 }
 
-export default HeadPage;
+export default Plate;
