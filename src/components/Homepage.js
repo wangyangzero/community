@@ -124,7 +124,7 @@ class Homepage extends Component{
         ];
 
         return(
-            <div>
+            <div className={"Homepage"}>
                 <div className="content">
                     <Tabs defaultActiveKey="1" tabBarGutter={0} className="interface">
                         <TabPane tab={<span><Icon type="home" />Swust程序交流社区</span>} key="1">
@@ -141,7 +141,6 @@ class Homepage extends Component{
                         <span><Icon type="menu-fold" /></span>
                         </Tooltip>
                         </span>} key="3">
-                            <h4>板块</h4>
                             <Plate/>
                         </TabPane>
                         <TabPane tab={
@@ -165,6 +164,7 @@ class Homepage extends Component{
                     </Tabs>
                 </div>
                 <div className="sideBar">
+                    <div className={"login"}>
                     <Tooltip placement = "top" title={"fork me on the Github"} >
                         <a href={"https://github.com/LazyCaty/community"}>
                             <img src={"https://i.loli.net/2019/04/06/5ca836d6cc365.jpg"} alt={"Github"} className={"logo2"}/></a>
@@ -175,6 +175,7 @@ class Homepage extends Component{
                     <Button type="primary" onClick={this.showRegisterModal}className="register-button">
                         注册
                     </Button>
+                    </div>
                     <div id={"upToDateMessage"}><h4 className={"message"}>最新留言</h4></div>
                     <List
                         itemLayout="horizontal"

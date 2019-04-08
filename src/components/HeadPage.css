@@ -13,6 +13,7 @@
     height: 300px;
     margin-left: 20px;
     float: left;
+    background-color: snow;
 }
 
 .side h3{
@@ -30,6 +31,7 @@
     width: 1000px;
     margin-top: 25px;
     display: inline-block;
+    background-color: snow;
 }
 .footer h3{
     margin-left: 500px;
