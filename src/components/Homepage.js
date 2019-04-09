@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import './Homepage.css'
 import Plate from "./Plate";
 import HeadPage from './HeadPage'
+import FireModal from './FireModal'
 const TabPane = Tabs.TabPane;
 
 class Homepage extends Component{
@@ -154,6 +155,7 @@ class Homepage extends Component{
                         <span><Icon type="fire" /></span>
                         </Tooltip>
                         </span>} key="5">
+                            <FireModal/>
                         </TabPane>
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"搜索"} >
