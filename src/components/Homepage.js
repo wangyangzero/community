@@ -5,6 +5,7 @@ import './Homepage.css'
 import Plate from "./Plate";
 import HeadPage from './HeadPage'
 import FireModal from './FireModal'
+import ClassSearch from './ClassSearch'
 const TabPane = Tabs.TabPane;
 
 class Homepage extends Component{
@@ -162,6 +163,7 @@ class Homepage extends Component{
                         <span><Icon type="search" /></span>
                         </Tooltip>
                         </span>} key="6">
+                            <ClassSearch/>
                         </TabPane>
                     </Tabs>
                 </div>
@@ -179,6 +181,7 @@ class Homepage extends Component{
                     </Button>
                     </div>
                     <div id={"upToDateMessage"}><h4 className={"message"}>最新留言</h4></div>
+                    <div className={"userMessage"}>
                     <List
                         itemLayout="horizontal"
                         dataSource={data}
@@ -192,6 +195,7 @@ class Homepage extends Component{
                             </List.Item>
                         )}
                     />
+                    </div>
                     <Modal
                         title="登录"
                         visible={this.state.loginModal}

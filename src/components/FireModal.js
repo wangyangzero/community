@@ -73,6 +73,7 @@ class FireModal extends Component{
             <span><Icon type={type} style={{ marginRight: 8 }} />{text}</span>);
         return(
             <div>
+                <h3>最火</h3>
                 <List
                     itemLayout="vertical"
                     size="large"
@@ -97,7 +98,7 @@ class FireModal extends Component{
                             {item.content}
                         </List.Item>
                     )}
-                />,
+                />
             </div>
         )
     }
