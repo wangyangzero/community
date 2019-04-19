@@ -25,7 +25,7 @@ class Plate extends Component {
                 description:"可通过此界面进行问题的提问，或者通过搜索查找是否有匹配的问题，会有管理员或者其他学过的同学为你解答",
             },
             {
-                title: '技术讨论',
+                title: '精品分享',
                 avatar:"https://i.loli.net/2019/04/05/5ca73d1d864e3.jpg",
                 link:"",
                 description:"发表一个话题，比如oj某道题的解法，或者某种技术的应用以及发表一个话题，比如oj某道题的解法，或者某种技术的应用，其他人可以参与讨论",

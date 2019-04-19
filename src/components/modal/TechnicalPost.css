@@ -1,0 +1,30 @@
+.TP{
+    background-color: ghostwhite;
+}
+
+.content{
+    margin-left: 150px;
+    margin-top: 10px;
+    width: 1000px;
+    display: inline-block;
+}
+.header{
+    margin-bottom: 20px;
+}
+.sideBar{
+    display: inline-block;
+}
+
+.content span{
+    font-weight: bold;
+    margin-left: 10px;
+}
+.ant-upload-select-picture-card i {
+    font-size: 32px;
+    color: #999;
+}
+
+.ant-upload-select-picture-card .ant-upload-text {
+    margin-top: 8px;
+    color: #666;
+}

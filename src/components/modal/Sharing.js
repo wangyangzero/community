@@ -1,6 +1,6 @@
 import React,{Component}from 'react';
 import "./Sharing.css";
-import {Avatar ,Tabs, Icon, Tooltip,Upload,Modal,List, Tag,Select,Input} from 'antd';
+import {Avatar ,Tabs, Icon, Tooltip,Upload,Modal,List, Select,Input} from 'antd';
 
 const TabPane = Tabs.TabPane;
 const Search = Input.Search;

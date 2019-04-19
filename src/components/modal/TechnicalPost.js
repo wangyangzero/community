@@ -1,18 +1,19 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import {List, Avatar, Icon, Tag,} from 'antd';
-import "./FireModal.css"
+import {Link} from 'react-router-dom'
+import './TechnicalPost.css'
 
-class FireModal extends Component{
+class TechnicalPost extends Component{
     constructor(props){
         super(props);
-        this.state={
-        }
+        this.state={};
     }
-
     render(){
+        const IconText = ({ type, text }) => (
+            <span><Icon type={type} style={{ marginRight: 8 }} />{text}</span>);
         const listData = [
             {
-                href: 'http://ant.design',
+                id: '1',
                 title: '80+机器学习数据集，还不快收藏',
                 avatar: "https://i.loli.net/2019/04/06/5ca877e06ed4f.jpg",
                 description: "2019/4/4",
@@ -27,7 +28,7 @@ class FireModal extends Component{
             }
             ,
             {
-                href: 'http://ant.design',
+                id: '2',
                 title: '清华、北大、浙大的计算机课程资源集都在这里了',
                 avatar:"https://i.loli.net/2019/04/06/5ca877e0cc40e.jpg",
                 description:"2019/4/5",
@@ -40,7 +41,7 @@ class FireModal extends Component{
                 tagColor:"gold",
             },
             {
-                href: 'http://ant.design',
+                id: '3',
                 title: 'Debug神经网络的五项基本原则',
                 avatar:"https://i.loli.net/2019/04/06/5ca877e27c961.jpg",
                 description:"2019/4/6",
@@ -54,7 +55,7 @@ class FireModal extends Component{
                 tagColor:"volcano",
             },
             {
-                href: 'http://ant.design',
+                id: '4',
                 title: 'R和Python谁更好？这次让你「鱼与熊掌」兼得',
                 avatar:"https://i.loli.net/2019/04/06/5ca877ef85b0a.jpg",
                 description:"2019/4/7",
@@ -68,11 +69,45 @@ class FireModal extends Component{
                 tagColor:"cyan",
             },
         ];
-        const IconText = ({ type, text }) => (
-            <span><Icon type={type} style={{ marginRight: 8 }} />{text}</span>);
+        const data = [
+            {
+                time: '2019/4/6',
+                link:"",
+                avatar:"https://i.loli.net/2019/04/06/5ca88103c0bca.jpg",
+                content:"你也可以使用WaterFallList实现，看Readme和examples就知道了 ，还有效果图",
+            },
+            {
+                time: '2019/4/5',
+                link:"",
+                avatar:"https://i.loli.net/2019/04/06/5ca88104017ab.jpg",
+                content:"初学者不要自己配置 开发环境, 直接从 expo开始, 这样会简单很多.",
+            },
+            {
+                time: '2019/4/4',
+                link:"",
+                avatar:"https://i.loli.net/2019/04/06/5ca88104980da.jpg",
+                content:" 确实是jdk的版本关系，你echo %JAVA_HOME%看一下版本",
+            },
+            {
+                time: '2019/4/3',
+                link:"",
+                avatar:"https://i.loli.net/2019/04/06/5ca881051c6a7.jpg",
+                content:"你是怎么解决的,我试了很多次都不能成功",
+            },
+            {
+                time: '2019/4/2',
+                link:"",
+                avatar:"https://i.loli.net/2019/04/06/5ca88294c3415.jpg",
+                content:"如何在android原生端获取到react native中的某个view",
+            },
+        ];
         return(
-            <div>
-                <h3>最火</h3>
+            <div className={"TP"}>
+                <div className={"content"}>
+                    <div className={"header"}>
+                <Avatar src="https://i.loli.net/2019/04/05/5ca73d1d864e3.jpg" size={64}/>
+                <span>精品分享</span>
+                    </div>
                 <List
                     itemLayout="vertical"
                     size="large"
@@ -91,16 +126,35 @@ class FireModal extends Component{
                         >
                             <List.Item.Meta
                                 avatar={<Avatar src={item.avatar} />}
-                                title={<a href={item.href}>{item.title}</a>}
+                                title={<Link to={"/modal/technicalPost/" + item.id}>{item.title}</Link>}
                                 description={item.description}
                             />
                             {item.content}
                         </List.Item>
                     )}
                 />
+                </div>
+                <div className="sideBar">
+                    <div id={"upToDateMessage"}><h4 className={"message"}>最新留言</h4></div>
+                    <div className={"userMessage"}>
+                        <List
+                            itemLayout="horizontal"
+                            dataSource={data}
+                            renderItem={item => (
+                                <List.Item>
+                                    <List.Item.Meta
+                                        avatar={<Avatar src={item.avatar} />}
+                                        title={<a href={item.link}>{item.time}</a>}
+                                        description={item.content}
+                                    />
+                                </List.Item>
+                            )}
+                        />
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
-export default FireModal;
+export default TechnicalPost;
