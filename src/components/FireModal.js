@@ -71,7 +71,7 @@ class FireModal extends Component{
         const IconText = ({ type, text }) => (
             <span><Icon type={type} style={{ marginRight: 8 }} />{text}</span>);
         return(
-            <div>
+            <div className="fireModal-content">
                 <h3>最火</h3>
                 <List
                     itemLayout="vertical"

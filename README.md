@@ -7,16 +7,13 @@
 | public  | 存放模板文件，是整个项目的根目录，所有的html都渲染到其中的index.html中 | index.html |
 
 ---
-# JavaScript 开发规范
-**西南科技大学 数据与知识工程实验室 自动问答团队2018-2019**
+
 
 ---
 # 目录
 ### 1.[命名规范](#1命名规范-1)
 ### 2.[注释规范](#2注释规范-1)
 ### 3.[框架开发规范](#3框架开发规范-1)
-### 4.[团队开发规范](#4团队开发规范-1)
-### 4.[=>官方说明](#官方说明)
 
 ---
 
@@ -231,108 +228,11 @@ function mergeCells(grid, cols, isAllSome) {
 + **思维导图**：
 + **文件命名**：组件（component）、类（class）使用大驼峰命名，其他文件命名根据实际情况可使用小驼峰、全小写中划线（-）、全小写下划线（_）。
 
-## 3.2 样式开发（less）
-
+## 3.2 样式开发（css）
+1. 对于每个单个页面采用Layout布局方式
+2. 命名方式采用 页面名称+模块名+具体功能,比如
+```
+.headpage-header-login
+```
 ## 3.3 变量作用域
 
-# 4.团队开发规范
-## 4.1 开发流程
-+ ### **任务分配及讨论**
->+ 开发者任务在Tower项目管理平台上进行分配、指定（一般在会议上指定）。开发者在收到开发任务后，需要与相应项目负责人进行讨论，约定自己的影响范围（如需要增加哪些文件，需要修改哪些文件等等）。
->+ tower平台：https://tower.im
-+ ### **基于接口文档开发**
->+ 开发者基于接口文档开发，根据接口文档中的输入、输出进行相应功能开发。
->+ 自动问答系统接口文档V1：https://www.easyapi.com/api/?documentId=17799
-+ ### **功能开发**
->+ 开发者进行功能开发，开发过程中如有疑问请联系相应项目负责人。
-+ ### **功能测试**
->+ 开发结束后进行功能测试，测试通过后优化代码，然后准备提交到GIT。
-+ ### **提交合并**
->+ 开发、测试、优化完成后，将代码提交并推送到你的GIT分支，然后发起代码合并请求。同时联系项目负责人审核代码，合并到maser。
->+ GIT地址：http://git.ksust.com
-
-## 4.2 开发原则
-
-## 4.3 团队协作
-+ ### **使用Tower进行项目管理**
-+ ### **使用EasyAPI进行接口管理**
-+ ### **使用GIT进行代码管理**
-
-# 参考
-+ [JavaScript 开发规范](https://www.cnblogs.com/polk6/p/4660195.html)
-+ [Markdown基础语法](https://github.com/younghz/Markdown/blob/master/README.md)
-
-
-
----
-# 官方说明
-
----
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

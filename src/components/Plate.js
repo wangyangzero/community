@@ -38,7 +38,7 @@ class Plate extends Component {
             },
         ];
         return (
-            <div>
+            <div className="plate-content">
                 <h3>板块</h3>
             <List
                 itemLayout="horizontal"
@@ -53,7 +53,7 @@ class Plate extends Component {
                     </List.Item>
                 )}
             />
-             <div className={"userCount"}>
+             <div className={"plate-userCount"}>
                 <Row gutter={16}>
                     <Col span={12}>
                         <Statistic title="活跃用户" value={112893} />
@@ -63,7 +63,7 @@ class Plate extends Component {
                     </Col>
                 </Row>
              </div>
-                <div className={"userRate"}>
+                <div className={"plate-userRate"}>
                     <Row gutter={16}>
                         <Col span={12}>
                             <Card>

@@ -2,13 +2,13 @@
     width: 500px;
     height: 300px;
 }
-.carousel{
+.headpage-carousel{
     width: 500px;
     height: 300px;
     float: left;
 }
 
-.side{
+.headpage-sideBar{
     width: 480px;
     height: 300px;
     margin-left: 20px;
@@ -16,24 +16,24 @@
     background-color: snow;
 }
 
-.side h3{
+.headpage-sideBar h3{
     margin-left: 125px;
 }
 
-.side div{
+.headpage-sideBar div{
     margin-left: 5px;
 }
-.side div a{
+.headpage-sideBar div a{
     font-size: 12px;
 }
 
-.footer{
+.headpage-footer{
     width: 1000px;
     margin-top: 25px;
     display: inline-block;
     background-color: snow;
 }
-.footer h3{
+ h3{
     margin-left: 500px;
 }
 

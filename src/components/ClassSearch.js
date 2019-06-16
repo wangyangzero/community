@@ -85,7 +85,7 @@ class ClassSearch extends Component{
             const IconText = ({ type, text }) => (
                 <span><Icon type={type} style={{ marginRight: 8 }} />{text}</span>);
             return(
-                <div>
+                <div className="classSearch-content">
                 <h3>搜索</h3>
                     <Select
                         showSearch

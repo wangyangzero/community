@@ -1,15 +1,15 @@
-.Homepage{
+.homepage{
     background-color: ghostwhite;
 }
 
-.content{
+.homepage-content{
     margin-left: 150px;
     margin-top: 10px;
     width: 1000px;
     display: inline-block;
 }
 
-.sideBar{
+.homepage-sideBar{
     width: 220px;
     float: right;
     margin-top: 12px;
@@ -18,7 +18,7 @@
     background-color: snow;
 }
 
-.sideBar Button{
+.homepage-sideBar Button{
     background-color: white !important;
     color: black !important;
     margin-left: 20px;
@@ -49,7 +49,7 @@
     width: 100%;
     margin-top: 30px;
 }
-.message {
+.homepage-sideBar-message {
     float: right;
     margin-top: 20px;
     margin-right: 15px;
@@ -57,7 +57,7 @@
     color: #2C3E50;
     text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1),0 1px 3px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2),0 5px 10px rgba(0,0,0,0.25);
 }
-.userMessage{
+.homepage-sideBar-userMessage{
     margin-left: 10px;
 }
 .logo1{

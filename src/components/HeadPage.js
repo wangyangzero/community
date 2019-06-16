@@ -39,8 +39,8 @@ class HeadPage extends Component{
         ];
 
         return(
-            <div >
-                <div className={"carousel"}>
+            <div className="headpage-content">
+                <div className="headpage-carousel">
                     <Carousel effect="fade" autoplay >
                         <div><img src={"https://i.loli.net/2019/04/06/5ca879d294776.jpg"} alt={"smile"} className={"photo"}/></div>
                         <div><img src={"https://i.loli.net/2019/04/06/5ca879d3d8ac5.jpg"}alt={"smile"} className={"photo"}/></div>
@@ -48,7 +48,7 @@ class HeadPage extends Component{
                         <div><img src={"https://i.loli.net/2019/04/06/5ca879d598bd9.jpg"}alt={"smile"} className={"photo"}/></div>
                     </Carousel>
                 </div>
-                <div className={"side"}>
+                <div className={"headpage-sideBar"}>
                     <h3>常用技术网站</h3>
                     <div id={"website1"}><b><a href={"http://www.runoob.com/"}>菜鸟教程--学的不仅仅是技术,更是梦想</a></b>
                         <Tag color="magenta">前端</Tag><Tag color="orange">后端</Tag><Tag color="blue">网站开发</Tag></div>
@@ -65,7 +65,7 @@ class HeadPage extends Component{
                     <div id={"website5"}><b><a href={"https://react.docschina.org/"}>Aguilar中文网站--从零开始的前端框架学习之旅</a></b>
                         <Tag color="pink">Aguilar</Tag></div>
                 </div>
-                <div className={"footer"}>
+                <div className={"headpage-footer"}>
                     <h3>热点信息</h3>
                     <List
                         itemLayout="horizontal"
