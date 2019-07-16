@@ -5,7 +5,9 @@ import './Homepage.css'
 import Plate from "./Plate";
 import HeadPage from './HeadPage'
 import FireModal from './FireModal'
+import NewModal from './NewModal'
 import ClassSearch from './ClassSearch'
+import WebLog from './WebLog'
 const TabPane = Tabs.TabPane;
 
 class Homepage extends Component{
@@ -17,7 +19,7 @@ class Homepage extends Component{
             confirmDirty: false,
         }
     }
-    /**
+    /**回调函数们
      * 显示登录对话框
      */
     showLoginModal = () => {
@@ -132,12 +134,15 @@ class Homepage extends Component{
                         <TabPane tab={<span><Icon type="home" />Swust程序交流社区</span>} key="1">
                             <HeadPage/>
                         </TabPane>
+
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"博客"} >
                         <span><Icon type="read" /></span>
                         </Tooltip>
                         </span>} key="2">
+                           <WebLog/>
                         </TabPane>
+
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"板块"} >
                         <span><Icon type="menu-fold" /></span>
@@ -145,12 +150,15 @@ class Homepage extends Component{
                         </span>} key="3">
                             <Plate/>
                         </TabPane>
+
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"最新"} >
                         <span><Icon type="clock-circle" /></span>
                         </Tooltip>
                         </span>} key="4">
+                         <NewModal/> 
                         </TabPane>
+
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"热门"} >
                         <span><Icon type="fire" /></span>
@@ -158,6 +166,7 @@ class Homepage extends Component{
                         </span>} key="5">
                             <FireModal/>
                         </TabPane>
+
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"搜索"} >
                         <span><Icon type="search" /></span>

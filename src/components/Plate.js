@@ -9,13 +9,12 @@ class Plate extends Component {
         super(props);
         this.state = {}
     }
-
     render() {
         const data = [
             {
                 title: '资源共享',
                 avatar:"https://i.loli.net/2019/04/05/5ca73a7555151.jpg",
-                link:"",
+                link:"/modal/sharing",
                 description:"同学们可以在这里分析一些项目的源代码、或者一些软件的安装包（jdk、tomcat、数据库或者编译器）等学习资源",
             },
             {
@@ -27,13 +26,13 @@ class Plate extends Component {
             {
                 title: '精品分享',
                 avatar:"https://i.loli.net/2019/04/05/5ca73d1d864e3.jpg",
-                link:"",
+                link:"/modal/technicalPost",
                 description:"发表一个话题，比如oj某道题的解法，或者某种技术的应用以及发表一个话题，比如oj某道题的解法，或者某种技术的应用，其他人可以参与讨论",
             },
             {
                 title: '实验室板块',
                 avatar:"https://i.loli.net/2019/04/05/5ca73d2207d3c.jpg",
-                link:"",
+                link:"/modal/laboratory",
                 description:"对实验室的一些介绍，或者实验室的一些动态，以及招新信息等,方便大家第一时间了解实验室以选择最适合自己的lab",
             },
         ];
@@ -47,7 +46,7 @@ class Plate extends Component {
                     <List.Item>
                         <List.Item.Meta
                             avatar={<Avatar src={item.avatar}/>}
-                            title={<b><a href="https://ant.design">{item.title}</a></b>}
+                            title={<b><a href={item.link}>{item.title}</a></b>}
                             description={item.description}
                         />
                     </List.Item>
