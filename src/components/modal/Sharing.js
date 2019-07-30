@@ -23,13 +23,6 @@ class Sharing extends Component{
         console.log(`selected ${value}`);
     }
 
-    handleBlur() {
-        console.log('blur');
-    }
-
-    handleFocus() {
-        console.log('focus');
-    }
     handleCancel = () => this.setState({ previewVisible: false })
 
     handlePreview = (file) => {
@@ -101,21 +94,6 @@ class Sharing extends Component{
                             <span><Icon type="download" /></span>
                             </Tooltip>
                             </span>} key="2">
-                                <Select
-                                    showSearch
-                                    style={{ width: 200,marginLeft:20}}
-                                    placeholder="请选择资源分类"
-                                    optionFilterProp="children"
-                                    onChange={this.handleChange}
-                                    onFocus={this.handleFocus}
-                                    onBlur={this.handleBlur}
-                                    filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                                    className={"classify"}
-                                >
-                                    <Option value="React">React</Option>
-                                    <Option value="Vue">Vue</Option>
-                                    <Option value="Aguilar">Aguilar</Option>
-                                </Select>
                                 <Search
                                     placeholder="请输入资源id"
                                     onSearch={value => console.log(value)}

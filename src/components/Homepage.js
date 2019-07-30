@@ -167,13 +167,13 @@ class Homepage extends Component{
                             <FireModal/>
                         </TabPane>
 
-                        <TabPane tab={
+{/*                        <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"搜索"} >
                         <span><Icon type="search" /></span>
                         </Tooltip>
                         </span>} key="6">
                             <ClassSearch/>
-                        </TabPane>
+                        </TabPane>*/}
                     </Tabs>
                 </div>
                 <div className="homepage-sideBar">
