@@ -6,7 +6,6 @@ import Plate from "./Plate";
 import HeadPage from './HeadPage'
 import FireModal from './FireModal'
 import NewModal from './NewModal'
-import ClassSearch from './ClassSearch'
 import WebLog from './WebLog'
 const TabPane = Tabs.TabPane;
 

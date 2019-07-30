@@ -1,3 +1,7 @@
+/**
+ * 留言板
+ */
+
 import React, {Component} from 'react';
 import {List, Avatar, Icon, Tag,} from 'antd';
 import {Link} from 'react-router-dom'

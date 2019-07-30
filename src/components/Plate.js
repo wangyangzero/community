@@ -18,13 +18,7 @@ class Plate extends Component {
                 description:"同学们可以在这里分析一些项目的源代码、或者一些软件的安装包（jdk、tomcat、数据库或者编译器）等学习资源",
             },
             {
-                title: '问题求助',
-                avatar:"https://i.loli.net/2019/04/05/5ca73d1c3ac8a.jpg",
-                link:"",
-                description:"可通过此界面进行问题的提问，或者通过搜索查找是否有匹配的问题，会有管理员或者其他学过的同学为你解答",
-            },
-            {
-                title: '精品分享',
+                title: '留言板',
                 avatar:"https://i.loli.net/2019/04/05/5ca73d1d864e3.jpg",
                 link:"/modal/technicalPost",
                 description:"发表一个话题，比如oj某道题的解法，或者某种技术的应用以及发表一个话题，比如oj某道题的解法，或者某种技术的应用，其他人可以参与讨论",
