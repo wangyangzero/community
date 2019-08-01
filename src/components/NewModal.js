@@ -1,74 +1,32 @@
 import React,{Component} from 'react';
 import {List, Avatar, Icon, Tag,Skeleton,} from 'antd';
-import "./NewModal.css"
+import "./NewModal.css";
+import {getFireInfo, getNewInfo} from "../redux/action/homepage";
+import {connect} from 'react-redux';
 
 class NewModal extends Component{
     constructor(props){
         super(props);
         this.state={
+            newInfo: [],
         }
     }
 
+    /**
+     * 组件渲染完用于ajax请求
+     */
+    componentDidMount(){
+        this.props.dispatch(getNewInfo())
+            .then(() => {
+                if(!!this.props.homepage.getNewInfo){
+                    this.setState({
+                        newInfo: this.props.homepage.getNewInfo.data
+                    })
+                }
+            })
+    }
+
     render(){
-        const listData = [
-            {
-                href: 'http://ant.design',
-                title: '中国要求外国科技公司提交源代码',
-                avatar: "https://i.loli.net/2019/04/06/5ca877e06ed4f.jpg",
-                description: "9分钟前",
-                comment:"27",
-                tag:"置顶",
-                tagColor:"purple",
-            }
-            ,
-            {
-                href: 'http://ant.design',
-                title: 'Adobe完成大笔收购：可以买到创意的网站 ',
-                avatar:"https://i.loli.net/2019/04/06/5ca877e0cc40e.jpg",
-                description:"三天前",
-               comment:"37",
-                tag:"置顶",
-                tagColor:"gold",
-            },
-            {
-                href: 'http://ant.design',
-                title: '阿里遭华尔街集体调低股价',
-                avatar:"https://i.loli.net/2019/04/06/5ca877e27c961.jpg",
-                description:"一周前",
-                
-                comment:"127",
-                tag:"推荐",
-                tagColor:"volcano",
-            },
-            
-             {
-                href: 'http://ant.design',
-                title: '互联网思维造车，汽车只共享不售卖',
-                avatar:"https://i.loli.net/2019/04/06/5ca877ef85b0a.jpg",
-                description:"2019/4/7",
-                comment:"127",
-                tag:"推荐",
-                tagColor:"cyan",
-            },
-             {
-                href: 'http://ant.design',
-                title: '中国石油用微信打造智慧加油站',
-                avatar:"https://i.loli.net/2019/04/06/5ca877e06ed4f.jpg",
-                description:"2019/4/7",
-                comment:"127",
-                tag:"推荐",
-                tagColor:"cyan",
-            },
-            {
-                href: 'http://ant.design',
-                title: '中国石油用微信打造智慧加油站',
-                avatar:"https://i.loli.net/2019/04/06/5ca877ef85b0a.jpg",
-                description:"15天前",
-                comment:"127",
-                tag:"推荐",
-                tagColor:"purple",
-            },
-        ];
         
         return(
             <div className="NewModal-content">
@@ -82,7 +40,7 @@ class NewModal extends Component{
                         },
                         pageSize: 6,
                     }}
-                    dataSource={listData}
+                    dataSource={this.state.newInfo}
                     renderItem={item => (
                         <List.Item
                             key={item.title}
@@ -104,5 +62,11 @@ class NewModal extends Component{
         )
     }
 }
+
+//组件和状态关联
+const mapStateToProps = state => {
+    return {homepage: state.homepage};
+};
+NewModal = connect(mapStateToProps)(NewModal);
 
 export default NewModal;

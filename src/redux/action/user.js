@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Qs from 'qs';
-import action from 'index';
+import action from './index';
 import config from './common/config';
 
 const {
@@ -10,7 +10,7 @@ const {
 
 const baseUrl = config.baseUrl;
 
-export function geyUserBlog() {
+export function getUserBlog() {
     return async (dispatch) =>{
         try {
             const data = (await axios(`${baseUrl}/user/blog`)).data;

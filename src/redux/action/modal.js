@@ -1,7 +1,7 @@
 /*模块界面接口*/
 import axios from 'axios';
 import Qs from 'qs';
-import action from 'index';
+import action from './index';
 import config from './common/config';
 
 const {

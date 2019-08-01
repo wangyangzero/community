@@ -7,8 +7,7 @@ import HeadPage from './HeadPage'
 import FireModal from './FireModal'
 import NewModal from './NewModal'
 import WebLog from './WebLog'
-import {getTechnicalWeb,getFireInfo,getNewInfo} from '../redux/action/homepage'
-import {connect} from 'react-redux'
+
 
 const TabPane = Tabs.TabPane;
 
@@ -22,15 +21,6 @@ class Homepage extends Component{
         }
     }
 
-    /**
-     * 组件渲染完用于ajax请求
-     */
-    componentDidMount(){
-        this.props.dispatch(getTechnicalWeb())
-            .then(() => {
-                console.log(this.props)
-            })
-    }
 
     /**回调函数们
      * 显示登录对话框
@@ -322,11 +312,5 @@ class Homepage extends Component{
         );
     }
 }
-
-//组件和状态关联
-const mapStateToProps = state => {
-    return {homepage: state.homepage};
-};
-Homepage = connect(mapStateToProps)(Homepage);
 
 export default Form.create()(Homepage);
