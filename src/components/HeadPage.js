@@ -21,7 +21,7 @@ class HeadPage extends Component{
             .then(() => {
                 if(!!this.props.homepage.getTechnicalWeb){
                     this.setState({
-                        technicalWeb: this.props.homepage.getTechnicalWeb.data
+                        technicalWeb: this.props.homepage.getTechnicalWeb
                     })
                 }
             });
@@ -29,7 +29,7 @@ class HeadPage extends Component{
             .then(() => {
                 if(!!this.props.homepage.getFireInfo){
                     this.setState({
-                        fireInfo: this.props.homepage.getFireInfo.data
+                        fireInfo: this.props.homepage.getFireInfo
                     })
                 }
             })
@@ -42,13 +42,13 @@ class HeadPage extends Component{
             let key = (i + 1).toString();
             let data = this.state.technicalWeb;
             let tags = [];
-            for(let j = 0;j < this.state.technicalWeb[i].tag.length;j++){
+            for(let j = 0;j < this.state.technicalWeb[i].data.tag.length;j++){
                 tags.push(
-                    <Tag color={data[i].tag[j].tagColor}>{data[i].tag[j].tagName}</Tag>
+                    <Tag color={data[i].data.tag[j].tagColor}>{data[i].data.tag[j].tagName}</Tag>
                 )
             }
             webData.push(
-                <div id={"website" + key}><b><a href={data[i].href}>{data[i].name}</a></b>{tags}</div>
+                <div id={"website" + key}><b><a href={data[i].data.href}>{data[i].data.name}</a></b>{tags}</div>
             )
         }
 
@@ -75,9 +75,9 @@ class HeadPage extends Component{
                         renderItem={item => (
                             <List.Item>
                                 <List.Item.Meta
-                                    avatar={<Avatar src={item.avatar}/>}
-                                    title={<b><a href="https://ant.design">{item.title}</a></b>}
-                                    description={item.content}
+                                    avatar={<Avatar src={item.data.avatar}/>}
+                                    title={<b><a href="https://ant.design">{item.data.title}</a></b>}
+                                    description={item.data.content}
                                 />
                             </List.Item>
                         )}

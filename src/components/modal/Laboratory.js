@@ -18,7 +18,7 @@ class Laboratory extends Component{
             .then(() => {
                 if(!!this.props.modal){
                     this.setState({
-                        labInfo: this.props.modal.getLabInfo.data,
+                        labInfo: this.props.modal.getLabInfo,
                     })
                 }
             })
@@ -44,12 +44,12 @@ class Laboratory extends Component{
                     dataSource={this.state.labInfo}
                     renderItem={item => (
                         <List.Item
-                            key={item.title}
+                            key={item.data.title}
                         >
-							<Descriptions bordered={true}  title={<a href={item.link}>{item.title}</a>}>
-							 <Descriptions.Item label="地址：">{item.place}</Descriptions.Item>
+							<Descriptions bordered={true}  title={<a href={item.data.link}>{item.data.title}</a>}>
+							 <Descriptions.Item label="地址：">{item.data.place}</Descriptions.Item>
 							    <Descriptions.Item label="实验室介绍：" >
-							     {item.content}
+							     {item.data.content}
 							    </Descriptions.Item>
 							  </Descriptions>,
                         </List.Item>

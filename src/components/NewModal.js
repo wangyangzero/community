@@ -20,7 +20,7 @@ class NewModal extends Component{
             .then(() => {
                 if(!!this.props.homepage.getNewInfo){
                     this.setState({
-                        newInfo: this.props.homepage.getNewInfo.data
+                        newInfo: this.props.homepage.getNewInfo
                     })
                 }
             })
@@ -43,15 +43,15 @@ class NewModal extends Component{
                     dataSource={this.state.newInfo}
                     renderItem={item => (
                         <List.Item
-                            key={item.title}
-                            extra={ <Tag color={item.tagColor}>{item.tag}</Tag>}
+                            key={item.data.title}
+                            extra={ <Tag color={item.data.tagColor}>{item.data.tag}</Tag>}
                         >
-                         <Skeleton avatar title={false} loading={item.loading} active>
+                         <Skeleton avatar title={false} loading={item.data.loading} active>
                             <List.Item.Meta 
-                                avatar={<Avatar src={item.avatar} />}
-                                title={<a href={item.href}>{item.title}</a>}
-                                description={<div>{item.description}&nbsp; &nbsp; <Icon type="message"/>
-                                    &nbsp; {item.comment}
+                                avatar={<Avatar src={item.data.avatar} />}
+                                title={<a href={item.data.href}>{item.data.title}</a>}
+                                description={<div>{item.data.description}&nbsp; &nbsp; <Icon type="message"/>
+                                    &nbsp; {item.data.comment}
                                 </div>}
                             />
                               </Skeleton>

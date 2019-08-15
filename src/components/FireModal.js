@@ -20,7 +20,7 @@ class FireModal extends Component{
             .then(() => {
                 if(!!this.props.homepage.getFireInfo){
                     this.setState({
-                        fireInfo: this.props.homepage.getFireInfo.data
+                        fireInfo: this.props.homepage.getFireInfo
                     })
                 }
             })
@@ -44,16 +44,16 @@ class FireModal extends Component{
                     dataSource={this.state.fireInfo}
                     renderItem={item => (
                         <List.Item
-                            key={item.title}
-                            actions={[<IconText type="star-o" text={item.like}/>, <IconText type="like-o" text={item.star} />, <IconText type="message" text={item.comment}/>]}
-                            extra={ <Tag color={item.tagColor}>{item.tag}</Tag>}
+                            key={item.data.title}
+                            actions={[<IconText type="star-o" text={item.data.like}/>, <IconText type="like-o" text={item.data.star} />, <IconText type="message" text={item.comment}/>]}
+                            extra={ <Tag color={item.data.tagColor}>{item.data.tag}</Tag>}
                         >
                             <List.Item.Meta
-                                avatar={<Avatar src={item.avatar} />}
-                                title={<a href={item.href}>{item.title}</a>}
-                                description={item.description}
+                                avatar={<Avatar src={item.data.avatar} />}
+                                title={<a href={item.data.href}>{item.data.title}</a>}
+                                description={item.data.description}
                             />
-                            {item.content}
+                            {item.data.content}
                         </List.Item>
                     )}
                 />

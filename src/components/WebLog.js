@@ -24,9 +24,10 @@ class WebLog extends Component{
     componentDidMount(){
         this.props.dispatch(getUserBlog())
             .then(() => {
+                console.log(this.props.user)
                 if(!!this.props.user){
                     this.setState({
-                        userBlog: this.props.user.getUserBlog.data
+                        userBlog: this.props.user.getUserBlog
                     });
                 }
             })
@@ -48,14 +49,14 @@ class WebLog extends Component{
                     renderItem={item => (
                         <List.Item>
                         <Typography>
-                           <Title level={2}><a href={item.href}>{item.title}</a></Title>
+                           <Title level={2}><a href={item.data.href}>{item.data.title}</a></Title>
                                <div className="time"><Icon type="canlendar"/>&nbsp;
-                             {item.time}</div>
+                             {item.data.time}</div>
                               <Paragraph>
-                               {item.easy_des}
+                               {item.data.easy_des}
                                </Paragraph>
                        </Typography>
-                        <Collapse bordered={false} ><Panel header="阅读全文" style={customPanelStyle}>{item.description}</Panel></Collapse>
+                        <Collapse bordered={false} ><Panel header="阅读全文" style={customPanelStyle}>{item.data.description}</Panel></Collapse>
                        </List.Item>
                     )}
                 />
