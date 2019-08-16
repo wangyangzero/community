@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7f0f90fb-f945-42b7-99fb-fc3ef619e0cb" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/action/common/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/action/common/config.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -55,7 +56,7 @@
           <entry key="css" value="58" />
           <entry key="html" value="4" />
           <entry key="jpg" value="2" />
-          <entry key="js" value="141" />
+          <entry key="js" value="142" />
           <entry key="json" value="10" />
           <entry key="md" value="1" />
           <entry key="ts" value="1" />
@@ -67,7 +68,7 @@
           <entry key="HTML" value="3" />
           <entry key="Image" value="2" />
           <entry key="JSON" value="10" />
-          <entry key="JavaScript" value="141" />
+          <entry key="JavaScript" value="142" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Scratch" value="1" />
           <entry key="TypeScript" value="1" />
@@ -83,7 +84,7 @@
         <counts>
           <entry key="css" value="1568" />
           <entry key="html" value="9" />
-          <entry key="js" value="10145" />
+          <entry key="js" value="10200" />
           <entry key="json" value="5" />
           <entry key="md" value="101" />
         </counts>
@@ -93,7 +94,7 @@
           <entry key="CSS" value="1568" />
           <entry key="HTML" value="9" />
           <entry key="JSON" value="5" />
-          <entry key="JavaScript" value="10145" />
+          <entry key="JavaScript" value="10200" />
           <entry key="PLAIN_TEXT" value="101" />
         </counts>
       </usages-collector>
@@ -101,11 +102,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/redux/action/user.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
               <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/redux/action/common/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -150,7 +160,6 @@
         <option value="$PROJECT_DIR$/src/routers/index.js" />
         <option value="$PROJECT_DIR$/src/components/modal/TechnicalPost.js" />
         <option value="$PROJECT_DIR$/src/redux/action/index.js" />
-        <option value="$PROJECT_DIR$/src/redux/action/common/config.js" />
         <option value="$PROJECT_DIR$/src/redux/action/common/setTokenHead.js" />
         <option value="$PROJECT_DIR$/src/redux/action/homepage.js" />
         <option value="$PROJECT_DIR$/src/redux/reducer/homepage.js" />
@@ -169,6 +178,7 @@
         <option value="$PROJECT_DIR$/src/components/modal/Laboratory.js" />
         <option value="$PROJECT_DIR$/src/components/FireModal.js" />
         <option value="$PROJECT_DIR$/src/components/NewModal.js" />
+        <option value="$PROJECT_DIR$/src/redux/action/common/config.js" />
       </list>
     </option>
   </component>
@@ -189,9 +199,9 @@
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-58" />
-    <option name="y" value="397" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="156" />
+    <option name="y" value="347" />
     <option name="width" value="1943" />
     <option name="height" value="1103" />
   </component>
@@ -240,6 +250,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="redux" type="462c0819:PsiDirectoryNode" />
               <item name="action" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="community" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="redux" type="462c0819:PsiDirectoryNode" />
+              <item name="action" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="community" type="b2602c69:ProjectViewProjectNode" />
@@ -352,12 +370,12 @@
       <workItem from="1565778122313" duration="3185000" />
       <workItem from="1565856153343" duration="92000" />
       <workItem from="1565858772569" duration="1533000" />
-      <workItem from="1565865533169" duration="1115000" />
+      <workItem from="1565865533169" duration="4459000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130997000" />
+    <option name="totallyTimeSpent" value="134341000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -369,10 +387,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="125" y="278" width="1554" height="882" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1340819" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1337286" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
@@ -384,7 +402,7 @@
       <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49933863" visible="true" weight="0.27234042" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49933863" visible="true" weight="0.2563418" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="调试" order="11" />
       <window_info anchor="bottom" id="TypeScript" order="12" />
@@ -505,13 +523,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/action/common/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -685,6 +696,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redux/action/common/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
         </state>
       </provider>
     </entry>
