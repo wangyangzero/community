@@ -20,5 +20,9 @@ export default KeyMirror({
     //获取用户博客信息
     GET_USER_BLOG_SUCCESS: null,
     GET_USER_BLOG_FAILURE: null,
+    
+    //获取登录状态
+    GET_LOGIN_STATUS_SUCCESS: null,
+    GET_LOGIN_STATUS_FAILURE: null,
 
 })

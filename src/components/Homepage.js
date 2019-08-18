@@ -2,11 +2,15 @@ import React,{Component} from 'react';
 import { Tabs, Icon,Tooltip,Modal,Button, Form, Input,Checkbox,List,Avatar} from 'antd';
 import 'antd/dist/antd.css';
 import './Homepage.css'
-import Plate from "./Plate";
 import HeadPage from './HeadPage'
 import FireModal from './FireModal'
 import NewModal from './NewModal'
+import MessageBoard from "./MessageBoard";
+import Laboratory from "./Laboratory";
 import WebLog from './WebLog'
+import {Link} from 'react-router-dom'
+import {getLoginStatus} from "../redux/action/userInfo";
+import connect from "react-redux/es/connect/connect";
 
 
 const TabPane = Tabs.TabPane;
@@ -16,8 +20,8 @@ class Homepage extends Component{
         super(props);
         this.state = {
             loginModal: false,
-            registerModal:false,
             confirmDirty: false,
+            loginStatus:[],
         }
     }
 
@@ -30,70 +34,34 @@ class Homepage extends Component{
             loginModal: true,
         });
     }
-    /**
-     * 显示注册对话框
-     */
-    showRegisterModal = () => {
-        this.setState({
-            registerModal: true,
-        });
-    }
+
     /**
      * 点击登录关闭对话框
      * @param e
      */
-    handleLogin = (e) => {
-        console.log(e);
+    handleLogin = () => {
+
+        console.log(this.props.form.getFieldsValue());
+        const data = this.props.form.getFieldsValue();
+        this.props.dispatch(getLoginStatus({
+            username: data.username,
+            password: data.password,
+            rememberMe: data.rememberMe,
+            header:{'Content-Type': 'application/json'},
+            })).then(()=> {
+            if(!!this.props.userInfo.getLoginStatus)
+            {
+                this.setState({
+                    loginStatus:this.props.userInfo.getLoginStatus
+                })
+            }
+        })
         this.setState({
             loginModal: false,
         });
     }
-    /**
-     * 点击登录关闭对话框
-     * @param e
-     */
-    handleRegister = (e) => {
-        console.log(e);
-        this.setState({
-            loginModal: false,
-            registerModal:false,
-        });
-    }
-    /**
-     * 将第二次的密码与第一次的进行比较
-     * @param rule
-     * @param value
-     * @param callback
-     */
-    compareToFirstPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && value !== form.getFieldValue('密码')) {
-            callback('两次输入的密码不一致');
-        } else {
-            callback();
-        }
-    }
-    /**
-     * 校验并获取第一次密码输入域的值
-     * @param rule
-     * @param value
-     * @param callback
-     */
-    validateToNextPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && this.state.confirmDirty) {
-            form.validateFields(['confirm'], { force: true });
-        }
-        callback();
-    }
-    /**
-     * 时刻更新两次密码比较的结果
-     * @param e
-     */
-    handleConfirmBlur = (e) => {
-        const value = e.target.value;
-        this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-    }
+
+
 
     render(){
         const { getFieldDecorator } = this.props.form;
@@ -147,11 +115,11 @@ class Homepage extends Component{
                         </TabPane>
 
                         <TabPane tab={
-                        <span><Tooltip placement = "bottom" title={"板块"} >
-                        <span><Icon type="menu-fold" /></span>
+                            <span><Tooltip placement = "bottom" title={"留言"} >
+                        <span><Icon type="message" /></span>
                         </Tooltip>
                         </span>} key="3">
-                            <Plate/>
+                            <MessageBoard/>
                         </TabPane>
 
                         <TabPane tab={
@@ -170,13 +138,13 @@ class Homepage extends Component{
                             <FireModal/>
                         </TabPane>
 
-{/*                        <TabPane tab={
-                        <span><Tooltip placement = "bottom" title={"搜索"} >
-                        <span><Icon type="search" /></span>
+                        <TabPane tab={
+                            <span><Tooltip placement = "bottom" title={"实验室"} >
+                        <span><Icon type="home" /></span>
                         </Tooltip>
                         </span>} key="6">
-                            <ClassSearch/>
-                        </TabPane>*/}
+                            <Laboratory/>
+                        </TabPane>
                     </Tabs>
                 </div>
                 <div className="homepage-sideBar">
@@ -189,7 +157,7 @@ class Homepage extends Component{
                         登录
                     </Button>
                     <Button type="primary" onClick={this.showRegisterModal}className="register-button">
-                        注册
+                        <Link to={'/user/Register'}>注册</Link>
                     </Button>
                     </div>
                     <div id={"upToDateMessage"}><h4 className={"homepage-sideBar-message"}>最新留言</h4></div>
@@ -218,7 +186,7 @@ class Homepage extends Component{
                     >
                         <Form >
                             <Form.Item>
-                                {getFieldDecorator('用户名', {
+                                {getFieldDecorator('username', {
                                     rules: [{ required: true, message: '请输入您的用户名!' }],
                                 })(
                                     <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -226,7 +194,7 @@ class Homepage extends Component{
                                 )}
                             </Form.Item>
                             <Form.Item>
-                                {getFieldDecorator('密码', {
+                                {getFieldDecorator('password', {
                                     rules: [{ required: true, message: '请输入您的密码!' }],
                                 })(
                                     <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -234,7 +202,7 @@ class Homepage extends Component{
                                 )}
                             </Form.Item>
                             <Form.Item>
-                                {getFieldDecorator('记住我', {
+                                {getFieldDecorator('rememberMe', {
                                     valuePropName: 'checked',
                                     initialValue: true,
                                 })(
@@ -248,69 +216,16 @@ class Homepage extends Component{
                             </Form.Item>
                         </Form>
                     </Modal>
-                    <Modal
-                        title="注册"
-                        visible={this.state.registerModal}
-                        footer={[]}
-                        onOk={this.handleRegister}
-                        onCancel={this.handleRegister}
-                        width={400}
-                    >
-                        <Form >
-                            <Form.Item>
-                                {getFieldDecorator('用户名', {
-                                    rules: [{ required: true, message: '请输入您的用户名!' }],
-                                })(
-                                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                           placeholder="用户名" />
-                                )}
-                            </Form.Item>
-                            <Form.Item>
-                                {getFieldDecorator('真实姓名', {
-                                    rules: [{ required: true, message: '请输入您的真实姓名!' }],
-                                })(
-                                    <Input prefix={<Icon type="robot" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                           placeholder="真实姓名" />
-                                )}
-                            </Form.Item>
-                            <Form.Item>
-                                {getFieldDecorator('学号', {
-                                    rules: [{ required: true, message: '请输入您的学号!' }],
-                                })(
-                                    <Input prefix={<Icon type="solution" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                           placeholder="学号" />
-                                )}
-                            </Form.Item>
-                            <Form.Item>
-                                {getFieldDecorator('密码', {
-                                    rules: [{ required: true, message: '请输入您的密码!' },
-                                        { validator: this.validateToNextPassword,}],
-                                })(
-                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                           type="password" placeholder="密码" />
-                                )}
-                            </Form.Item>
-                            <Form.Item>
-                                {getFieldDecorator('确认密码', {
-                                    rules: [{ required: true, message: '请确认您的密码!' },{
-                                        validator: this.compareToFirstPassword,}],
-                                })(
-                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                           type="password" placeholder="请确认密码" onBlur={this.handleConfirmBlur}/>
-                                )}
-                            </Form.Item>
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit" className="register-form-button"
-                                        onClick={this.handleRegister}>
-                                    注册
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </Modal>
                 </div>
             </div>
         );
     }
 }
+
+//组件和状态关联
+const mapStateToProps = state => {
+    return {userInfo: state.userInfo};
+};
+Homepage = connect(mapStateToProps)(Homepage);
 
 export default Form.create()(Homepage);

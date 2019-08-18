@@ -27,8 +27,7 @@ class FireModal extends Component{
     }
 
     render(){
-        const IconText = ({ type, text }) => (
-            <span><Icon type={type} style={{ marginRight: 8 }} />{text}</span>);
+
         return(
             <div className="fireModal-content">
                 <h3>最火</h3>
@@ -45,7 +44,6 @@ class FireModal extends Component{
                     renderItem={item => (
                         <List.Item
                             key={item.data.title}
-                            actions={[<IconText type="star-o" text={item.data.like}/>, <IconText type="like-o" text={item.data.star} />, <IconText type="message" text={item.comment}/>]}
                             extra={ <Tag color={item.data.tagColor}>{item.data.tag}</Tag>}
                         >
                             <List.Item.Meta

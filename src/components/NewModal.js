@@ -50,8 +50,7 @@ class NewModal extends Component{
                             <List.Item.Meta 
                                 avatar={<Avatar src={item.data.avatar} />}
                                 title={<a href={item.data.href}>{item.data.title}</a>}
-                                description={<div>{item.data.description}&nbsp; &nbsp; <Icon type="message"/>
-                                    &nbsp; {item.data.comment}
+                                description={<div>{item.data.description}&nbsp; &nbsp;
                                 </div>}
                             />
                               </Skeleton>
