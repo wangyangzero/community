@@ -25,4 +25,12 @@ export default KeyMirror({
     GET_LOGIN_STATUS_SUCCESS: null,
     GET_LOGIN_STATUS_FAILURE: null,
 
+    //用户注册
+    GET_USER_REGISTER_SUCCESS: null,
+    GET_USER_REGISTER_FAILURE: null,
+
+    //获取用户信息
+    GET_USER_INFO_SUCCESS: null,
+    GET_USER_INFO_FAILURE: null,
+
 })

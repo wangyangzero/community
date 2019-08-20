@@ -1,15 +1,13 @@
 import React,{Component} from 'react';
-import { Tabs, Icon,Tooltip,Modal,Button, Form, Input,Checkbox,List,Avatar} from 'antd';
+import {Tabs, Icon, Tooltip, Modal, Button, Form, Input, Checkbox, List, Avatar, message} from 'antd';
 import 'antd/dist/antd.css';
 import './Homepage.css'
 import HeadPage from './HeadPage'
 import FireModal from './FireModal'
 import NewModal from './NewModal'
-import MessageBoard from "./MessageBoard";
-import Laboratory from "./Laboratory";
 import WebLog from './WebLog'
 import {Link} from 'react-router-dom'
-import {getLoginStatus} from "../redux/action/userInfo";
+import {getLoginStatus,getUserInfo} from "../redux/action/userInfo";
 import connect from "react-redux/es/connect/connect";
 
 
@@ -21,7 +19,7 @@ class Homepage extends Component{
         this.state = {
             loginModal: false,
             confirmDirty: false,
-            loginStatus:[],
+            userInfo:'',
         }
     }
 
@@ -33,34 +31,45 @@ class Homepage extends Component{
         this.setState({
             loginModal: true,
         });
-    }
+    };
 
     /**
-     * 点击登录关闭对话框
-     * @param e
+     * 登录功能
      */
     handleLogin = () => {
-
-        console.log(this.props.form.getFieldsValue());
         const data = this.props.form.getFieldsValue();
         this.props.dispatch(getLoginStatus({
             username: data.username,
             password: data.password,
             rememberMe: data.rememberMe,
-            header:{'Content-Type': 'application/json'},
             })).then(()=> {
             if(!!this.props.userInfo.getLoginStatus)
             {
-                this.setState({
-                    loginStatus:this.props.userInfo.getLoginStatus
-                })
+                this.handleLoginSuccess(this.props.userInfo.getLoginStatus);
             }
-        })
+        });
         this.setState({
             loginModal: false,
         });
-    }
-
+    };
+    /**
+     * 登录成功
+     * @param data
+     */
+    handleLoginSuccess = (data) => {
+        if(data.status === 200){
+            message.success(data.data);
+            this.props.dispatch(getUserInfo(data.token)).then(()=>{
+                if(!!this.props.userInfo){
+                    this.setState({
+                        userInfo: this.props.userInfo.getUserInfo
+                    })
+                }
+            })
+        } else{
+            message.error(data.error)
+        }
+    };
 
 
     render(){
@@ -114,13 +123,13 @@ class Homepage extends Component{
                            <WebLog/>
                         </TabPane>
 
-                        <TabPane tab={
+{/*                        <TabPane tab={
                             <span><Tooltip placement = "bottom" title={"留言"} >
                         <span><Icon type="message" /></span>
                         </Tooltip>
                         </span>} key="3">
                             <MessageBoard/>
-                        </TabPane>
+                        </TabPane>*/}
 
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"最新"} >
@@ -138,13 +147,13 @@ class Homepage extends Component{
                             <FireModal/>
                         </TabPane>
 
-                        <TabPane tab={
+{/*                        <TabPane tab={
                             <span><Tooltip placement = "bottom" title={"实验室"} >
                         <span><Icon type="home" /></span>
                         </Tooltip>
                         </span>} key="6">
                             <Laboratory/>
-                        </TabPane>
+                        </TabPane>*/}
                     </Tabs>
                 </div>
                 <div className="homepage-sideBar">
@@ -156,7 +165,7 @@ class Homepage extends Component{
                     <Button type="primary" onClick={this.showLoginModal}>
                         登录
                     </Button>
-                    <Button type="primary" onClick={this.showRegisterModal}className="register-button">
+                    <Button type="primary" className="register-button">
                         <Link to={'/user/Register'}>注册</Link>
                     </Button>
                     </div>
