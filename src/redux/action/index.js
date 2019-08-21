@@ -9,6 +9,18 @@ export default KeyMirror({
     GET_FIRE_INFO_SUCCESS: null,
     GET_FIRE_INFO_FAILURE: null,
 
+    //添加最热信息
+    ADD_FIRE_INFO_SUCCESS: null,
+    ADD_FIRE_INFO_FAILURE: null,
+
+    //修改最热信息
+    UPDATE_FIRE_INFO_SUCCESS: null,
+    UPDATE_FIRE_INFO_FAILURE: null,
+
+    //删除最热信息
+    DELETE_FIRE_INFO_SUCCESS: null,
+    DELETE_FIRE_INFO_FAILURE: null,
+
     //获取最新信息
     GET_NEW_INFO_SUCCESS: null,
     GET_NEW_INFO_FAILURE: null,

@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Tabs, Icon, Tooltip, Modal, Button, Form, Input, Checkbox, List, Avatar, message} from 'antd';
+import {Tabs, Icon, Tooltip, Modal, Button, Form, Input, Checkbox, List, Avatar, message,Menu, Dropdown,} from 'antd';
 import 'antd/dist/antd.css';
 import './Homepage.css'
 import HeadPage from './HeadPage'
@@ -7,7 +7,6 @@ import Laboratory from './Laboratory'
 import MessageBoard from './MessageBoard'
 import FireModal from './FireModal'
 import NewModal from './NewModal'
-import WebLog from './WebLog'
 import {Link} from 'react-router-dom'
 import {getLoginStatus,getUserInfo} from "../redux/action/userInfo";
 import connect from "react-redux/es/connect/connect";
@@ -31,8 +30,9 @@ class Homepage extends Component{
      */
     componentDidMount(){
         setInterval(()=>{
-            if(localStorage.exp - Date.now() < 50){
+            if(localStorage.exp - Date.now() < 50 && localStorage.exp !== ''){
                 message.error('登录已过期请重新登录');
+                setTimeout(()=>window.location.reload(),1000);
                 localStorage.token = '';
                 localStorage.id =  '';
                 localStorage.username = '';
@@ -41,10 +41,10 @@ class Homepage extends Component{
                 localStorage.Authorization = '';
                 localStorage.exp = '';
             }
-        },360000)
+        },1200000)
     }
 
-    /**回调函数们
+    /**
      * 显示登录对话框
      */
     showLoginModal = () => {
@@ -89,17 +89,46 @@ class Homepage extends Component{
                     localStorage.Authorization = this.props.userInfo.getUserInfo.Authorization;
                     localStorage.exp = this.props.userInfo.getUserInfo.exp;
                 }
-            })
+            });
+            setTimeout(()=>window.location.reload(),1000);
         } else{
             message.error(data.error)
         }
     };
-
-
+    /**
+     * 退出登录
+     * @param key 下拉框的key值
+     */
+    logout = ({key})=>{
+        if(key === 'item_2'){
+            message.success('您已退出登录');
+            this.props.history.push('/');
+            localStorage.token = '';
+            localStorage.id =  '';
+            localStorage.username = '';
+            localStorage.nickname = '';
+            localStorage.message = '';
+            localStorage.Authorization = '';
+            localStorage.exp = '';
+        }
+    };
 
 
     render(){
         const { getFieldDecorator } = this.props.form;
+        const menu = (
+            <Menu onClick={this.logout}>
+                <Menu.Item>
+                    <span><Icon type="user" />&nbsp;&nbsp;&nbsp;{localStorage.username}</span>
+                </Menu.Item>
+                <Menu.Item>
+                    <span><Icon type="home" />&nbsp;&nbsp;&nbsp;个人中心</span>
+                </Menu.Item>
+                <Menu.Item>
+                    <span><Icon type="poweroff" />&nbsp;&nbsp;&nbsp;退出登录</span>
+                </Menu.Item>
+            </Menu>
+        );
         const data = [
             {
                 time: '2019/4/6',
@@ -133,61 +162,22 @@ class Homepage extends Component{
             },
         ];
 
-        let userModal = '';
+        let userModal = [];
         if(localStorage.token !== ''){
-        }
-
-        return(
-            <div className="homepage">
-                <div className="homepage-content">
-                    <Tabs defaultActiveKey="1" tabBarGutter={0} className="interface">
-                        <TabPane tab={<span><Icon type="home" />Swust程序交流社区</span>} key="1">
-                            <HeadPage/>
-                        </TabPane>
-
-                        <TabPane tab={
-                        <span><Tooltip placement = "bottom" title={"博客"} >
-                        <span><Icon type="read" /></span>
-                        </Tooltip>
-                        </span>} key="2">
-                           <WebLog/>
-                        </TabPane>
-
-{                        <TabPane tab={
-                            <span><Tooltip placement = "bottom" title={"留言"} >
-                        <span><Icon type="message" /></span>
-                        </Tooltip>
-                        </span>} key="3">
-                            <MessageBoard/>
-                        </TabPane>}
-
-                        <TabPane tab={
-                        <span><Tooltip placement = "bottom" title={"最新"} >
-                        <span><Icon type="clock-circle" /></span>
-                        </Tooltip>
-                        </span>} key="4">
-                         <NewModal/> 
-                        </TabPane>
-
-                        <TabPane tab={
-                        <span><Tooltip placement = "bottom" title={"热门"} >
-                        <span><Icon type="fire" /></span>
-                        </Tooltip>
-                        </span>} key="5">
-                            <FireModal/>
-                        </TabPane>
-
-{                        <TabPane tab={
-                            <span><Tooltip placement = "bottom" title={"实验室"} >
-                        <span><Icon type="home" /></span>
-                        </Tooltip>
-                        </span>} key="6">
-                            <Laboratory/>
-                        </TabPane>}
-                    </Tabs>
+            userModal.push(
+                <div className={"login"}>
+                    <Tooltip placement = "top" title={"fork me on the Github"} >
+                        <a href={"https://github.com/LazyCaty/community"}>
+                            <img src={"https://i.loli.net/2019/04/06/5ca836d6cc365.jpg"} alt={"Github"} className={"logo2"}/></a>
+                    </Tooltip>
+                    <Dropdown overlay={menu} placement="bottomCenter" >
+                <span><Avatar src={localStorage.avatar} icon="user" size="large" style={{marginLeft:'50px'}}/>&nbsp;欢迎回来</span>
+                    </Dropdown>
                 </div>
-                <div className="homepage-sideBar">
-                    <div className={"login"}>
+            )
+        } else{
+            userModal.push(
+                <div className={"login"}>
                     <Tooltip placement = "top" title={"fork me on the Github"} >
                         <a href={"https://github.com/LazyCaty/community"}>
                             <img src={"https://i.loli.net/2019/04/06/5ca836d6cc365.jpg"} alt={"Github"} className={"logo2"}/></a>
@@ -198,7 +188,53 @@ class Homepage extends Component{
                     <Button type="primary" className="register-button">
                         <Link to={'/user/Register'}>注册</Link>
                     </Button>
-                    </div>
+                </div>
+            )
+        }
+
+        return(
+            <div className="homepage">
+                <div className="homepage-content">
+                    <Tabs defaultActiveKey="1" tabBarGutter={0} className="interface">
+                        <TabPane tab={<span><Icon type="home" />Swust程序交流社区</span>} key="1">
+                            <HeadPage/>
+                        </TabPane>
+
+{                        <TabPane tab={
+                            <span><Tooltip placement = "bottom" title={"留言"} >
+                        <span><Icon type="message" /></span>
+                        </Tooltip>
+                        </span>} key="2">
+                            <MessageBoard/>
+                        </TabPane>}
+
+                        <TabPane tab={
+                        <span><Tooltip placement = "bottom" title={"最新"} >
+                        <span><Icon type="clock-circle" /></span>
+                        </Tooltip>
+                        </span>} key="3">
+                         <NewModal/> 
+                        </TabPane>
+
+                        <TabPane tab={
+                        <span><Tooltip placement = "bottom" title={"热门"} >
+                        <span><Icon type="fire" /></span>
+                        </Tooltip>
+                        </span>} key="4">
+                            <FireModal/>
+                        </TabPane>
+
+{                        <TabPane tab={
+                            <span><Tooltip placement = "bottom" title={"实验室"} >
+                        <span><Icon type="home" /></span>
+                        </Tooltip>
+                        </span>} key="5">
+                            <Laboratory/>
+                        </TabPane>}
+                    </Tabs>
+                </div>
+                <div className="homepage-sideBar">
+                    {userModal}
                     <div id={"upToDateMessage"}><h4 className={"homepage-sideBar-message"}>最新留言</h4></div>
                     <div className={"homepage-sideBar-userMessage"}>
                     <List

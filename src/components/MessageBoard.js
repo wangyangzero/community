@@ -44,13 +44,13 @@ class MessageBoard extends Component{
                                       onKeyPress={this.handleKeyPress}
                                     />
                                     </AutoComplete> 
-                                     <Button type="primary">
+                                     <Button type="primary" className='message-board-button'>
                                       <Icon type="message" />
                                       发布
                                     </Button>
                            </div>
                            <div>
-                               <p>2308条评论</p>
+                               <p className='message-board-p'>2308条评论</p>
                                <List
                                   itemLayout="vertical"
                                   size="small"

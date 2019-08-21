@@ -27,7 +27,6 @@
 .register-button{
     background-color: white !important;
     color: black !important;
-    margin-left: 30px;
 }
 .login{
     height: 62px;
@@ -81,4 +80,8 @@
 #upToDateMessage{
     width: 180px;
     display: inline-block;
+}
+
+.ant-dropdown-open,.ant-dropdown-trigger{
+    width: 10px!important;
 }
