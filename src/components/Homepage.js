@@ -23,6 +23,24 @@ class Homepage extends Component{
         }
     }
 
+    /**
+     * 判断登录是否过期
+     *
+     */
+    componentDidMount(){
+        setInterval(()=>{
+            if(localStorage.exp - Date.now() < 50){
+                message.error('登录已过期请重新登录');
+                localStorage.token = '';
+                localStorage.id =  '';
+                localStorage.username = '';
+                localStorage.nickname = '';
+                localStorage.message = '';
+                localStorage.Authorization = '';
+                localStorage.exp = '';
+            }
+        },360000)
+    }
 
     /**回调函数们
      * 显示登录对话框
@@ -59,17 +77,23 @@ class Homepage extends Component{
     handleLoginSuccess = (data) => {
         if(data.status === 200){
             message.success(data.data);
+            localStorage.token = data.token;
             this.props.dispatch(getUserInfo(data.token)).then(()=>{
                 if(!!this.props.userInfo){
-                    this.setState({
-                        userInfo: this.props.userInfo.getUserInfo
-                    })
+                    localStorage.id =  this.props.userInfo.getUserInfo.id;
+                    localStorage.username = this.props.userInfo.getUserInfo.username;
+                    localStorage.nickname = this.props.userInfo.getUserInfo.nickname;
+                    localStorage.message = this.props.userInfo.getUserInfo.message;
+                    localStorage.Authorization = this.props.userInfo.getUserInfo.Authorization;
+                    localStorage.exp = this.props.userInfo.getUserInfo.exp;
                 }
             })
         } else{
             message.error(data.error)
         }
     };
+
+
 
 
     render(){
@@ -106,6 +130,10 @@ class Homepage extends Component{
                 content:"如何在android原生端获取到react native中的某个view",
             },
         ];
+
+        let userModal = '';
+        if(localStorage.token !== ''){
+        }
 
         return(
             <div className="homepage">
