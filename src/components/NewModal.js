@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import {List, Avatar, Icon, Tag,Skeleton,} from 'antd';
+import {List, Avatar,Tag,Skeleton,} from 'antd';
 import "./NewModal.css";
-import {getFireInfo, getNewInfo} from "../redux/action/homepage";
+import {getNewInfo} from "../redux/action/homepage";
 import {connect} from 'react-redux';
 
 class NewModal extends Component{
