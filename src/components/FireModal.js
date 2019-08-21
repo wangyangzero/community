@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {List, Avatar, Icon, Tag,} from 'antd';
+import {List, Avatar,Tag,} from 'antd';
 import "./FireModal.css";
 import {getFireInfo} from '../redux/action/homepage';
 import {connect} from 'react-redux'

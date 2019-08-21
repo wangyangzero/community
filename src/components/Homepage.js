@@ -3,6 +3,8 @@ import {Tabs, Icon, Tooltip, Modal, Button, Form, Input, Checkbox, List, Avatar,
 import 'antd/dist/antd.css';
 import './Homepage.css'
 import HeadPage from './HeadPage'
+import Laboratory from './Laboratory'
+import MessageBoard from './MessageBoard'
 import FireModal from './FireModal'
 import NewModal from './NewModal'
 import WebLog from './WebLog'
@@ -151,13 +153,13 @@ class Homepage extends Component{
                            <WebLog/>
                         </TabPane>
 
-{/*                        <TabPane tab={
+{                        <TabPane tab={
                             <span><Tooltip placement = "bottom" title={"留言"} >
                         <span><Icon type="message" /></span>
                         </Tooltip>
                         </span>} key="3">
                             <MessageBoard/>
-                        </TabPane>*/}
+                        </TabPane>}
 
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"最新"} >
@@ -175,13 +177,13 @@ class Homepage extends Component{
                             <FireModal/>
                         </TabPane>
 
-{/*                        <TabPane tab={
+{                        <TabPane tab={
                             <span><Tooltip placement = "bottom" title={"实验室"} >
                         <span><Icon type="home" /></span>
                         </Tooltip>
                         </span>} key="6">
                             <Laboratory/>
-                        </TabPane>*/}
+                        </TabPane>}
                     </Tabs>
                 </div>
                 <div className="homepage-sideBar">
