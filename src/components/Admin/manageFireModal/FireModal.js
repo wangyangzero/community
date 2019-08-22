@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import './FireModal.css'
 import NavMenu from '../menu/NavMenu'
 import {getFireInfo,addFireInfo,updateFireInfo,deleteFireInfo} from '../../../redux/action/adminHome';
-import {Button, Card, Table,Modal,Input,Form} from 'antd'
+import {Button, Card, Table,Modal,Input,Form,message,Popconfirm} from 'antd'
 import {connect} from 'react-redux'
+
 const {TextArea} = Input;
 
 class FireModal extends Component {
@@ -53,7 +54,8 @@ class FireModal extends Component {
             tagColor: record.tagColor,
             content: record.content,
         }));
-        window.location.reload();
+        message.success('添加新闻成功');
+        setTimeout(()=>window.location.reload(),1000);
         this.setState({
             addNewsModal: false,
         });
@@ -102,7 +104,8 @@ class FireModal extends Component {
             tagColor: record._tagColor,
             content: record._content,
         }));
-        window.location.reload();
+        message.success('修改新闻成功');
+        setTimeout(()=>window.location.reload(),1000);
         this.setState({
             updateNewsModal: false,
         });
@@ -122,8 +125,10 @@ class FireModal extends Component {
     handleDeleteNews = (record) =>{
         this.props.dispatch(deleteFireInfo({
             id: record._id
-        }))
-        window.location.reload();
+        }));
+        message.success('删除新闻成功');
+        setTimeout(()=>window.location.reload(),1000);
+
     };
 
     render() {
@@ -162,7 +167,9 @@ class FireModal extends Component {
                 render: (text, record) => {
 
                     return(
-                        <Button onClick={ () =>{this.handleDeleteNews(record)}}>删除</Button>
+                        <Popconfirm placement="topLeft" title={'确定要删除么'} onConfirm={ () =>{this.handleDeleteNews(record)}} okText="确定" cancelText="取消">
+                            <Button >删除</Button>
+                        </Popconfirm>
                     )
                 }
             },

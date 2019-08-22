@@ -5,6 +5,8 @@ import Homepage from '../components/Homepage'//除在座以外的选项都选它
 import Register from '../components/Register'
 import UsersInfo from '../components/UsersInfo'
 import FireModal from '../components/Admin/manageFireModal/FireModal'
+import NewModal from '../components/Admin/manageNewModal/NewModal'
+import User from '../components/Admin/user/User'
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 
 class Routes extends Component{
@@ -17,6 +19,8 @@ class Routes extends Component{
                     <Route exact path="/admin/home" component={NavMenu} />
                      <Route exact path="/333" component={UsersInfo} />
                     <Route exact path="/admin/firemodal" component={FireModal} />
+                    <Route exact path="/admin/newmodal" component={NewModal} />
+                    <Route exact path="/admin/user" component={User} />
                 </Switch>
             </Router>
         )

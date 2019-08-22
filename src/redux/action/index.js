@@ -25,6 +25,18 @@ export default KeyMirror({
     GET_NEW_INFO_SUCCESS: null,
     GET_NEW_INFO_FAILURE: null,
 
+    //添加最热信息
+    ADD_NEW_INFO_SUCCESS: null,
+    ADD_NEW_INFO_FAILURE: null,
+
+    //修改最热信息
+    UPDATE_NEW_INFO_SUCCESS: null,
+    UPDATE_NEW_INFO_FAILURE: null,
+
+    //删除最热信息
+    DELETE_NEW_INFO_SUCCESS: null,
+    DELETE_NEW_INFO_FAILURE: null,
+
     //获取实验室信息
     GET_LAB_INFO_SUCCESS: null,
     GET_LAB_INFO_FAILURE: null,
@@ -44,5 +56,17 @@ export default KeyMirror({
     //获取用户信息
     GET_USER_INFO_SUCCESS: null,
     GET_USER_INFO_FAILURE: null,
+
+    //获取用户列表
+    GET_USER_LIST_SUCCESS: null,
+    GET_USER_LIST_FAILURE: null,
+
+    //修改用户信息
+    UPDATE_USER_INFO_SUCCESS: null,
+    UPDATE_USER_INFO_FAILURE: null,
+
+    //删除用户
+    DELETE_USER_SUCCESS: null,
+    DELETE_USER_FAILURE: null,
 
 })

@@ -96,11 +96,19 @@ class Homepage extends Component{
         }
     };
     /**
+     * 关闭登录对话框
+     */
+    handleCancel = () => {
+        this.setState({
+            loginModal: false,
+        });
+    };
+    /**
      * 退出登录
      * @param key 下拉框的key值
      */
-    logout = ({key})=>{
-        if(key === 'item_2'){
+    loghome = ({key})=>{
+        if(key === 'logout'){
             message.success('您已退出登录');
             this.props.history.push('/');
             localStorage.token = '';
@@ -116,15 +124,20 @@ class Homepage extends Component{
 
     render(){
         const { getFieldDecorator } = this.props.form;
+        const adminHome = localStorage.Authorization === '0' ? '' :
+            <Menu.Item key='adminhome'>
+                <Link to='/admin/home'><span><Icon type="bank" />&nbsp;&nbsp;&nbsp;管理员中心</span></Link>
+        </Menu.Item>;
         const menu = (
-            <Menu onClick={this.logout}>
-                <Menu.Item>
+            <Menu onClick={this.loghome}>
+                <Menu.Item key='username'>
                     <span><Icon type="user" />&nbsp;&nbsp;&nbsp;{localStorage.username}</span>
                 </Menu.Item>
-                <Menu.Item>
+                <Menu.Item key='userhome'>
                     <span><Icon type="home" />&nbsp;&nbsp;&nbsp;个人中心</span>
                 </Menu.Item>
-                <Menu.Item>
+                {adminHome}
+                <Menu.Item key='logout'>
                     <span><Icon type="poweroff" />&nbsp;&nbsp;&nbsp;退出登录</span>
                 </Menu.Item>
             </Menu>
@@ -256,7 +269,7 @@ class Homepage extends Component{
                         visible={this.state.loginModal}
                         footer={[]}
                         onOk={this.handleLogin}
-                        onCancel={this.handleRegister}
+                        onCancel={this.handleCancel}
                         width={400}
                     >
                         <Form >

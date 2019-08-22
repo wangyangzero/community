@@ -31,19 +31,28 @@ class NavMenu extends Component{
                                 mode="inline">
                                 <Menu.Item key="/admin/firemodal">
                                     <NavLink to='/admin/firemodal'>
-                                        <Icon type="pie-chart" />
+                                        <Icon type="fire" />
                                         <span>最热新闻</span>
                                     </NavLink>
                                 </Menu.Item>
-                                <Menu.Item key="/personal/account">
-                                    <NavLink to='/personal/account'>
-                                        <Icon type="user" />
-                                        <span>账号信息</span>
+                                <Menu.Item key="/admin/newmodal">
+                                    <NavLink to='/admin/newmodal'>
+                                        <Icon type="clock-circle" />
+                                        <span>最新新闻</span>
                                     </NavLink>
                                 </Menu.Item>
-                                    <Menu.Item key="/personal/goods">
-                                        <NavLink to='/personal/goods'>
-                                            <Icon type="shop" /><span>已购产品</span></NavLink></Menu.Item>
+                                <Menu.Item key="/admin/user">
+                                    <NavLink to='/admin/user'>
+                                        <Icon type="user" />
+                                        <span>用户管理</span>
+                                    </NavLink>
+                                </Menu.Item>
+                                <Menu.Item key="/">
+                                    <NavLink to='/'>
+                                        <Icon type="home" />
+                                        <span>返回主页</span>
+                                    </NavLink>
+                                </Menu.Item>
                             </Menu>
                         </Sider>
                     </Layout>
