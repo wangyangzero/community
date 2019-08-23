@@ -3,6 +3,7 @@ import {List, Avatar,Tag,} from 'antd';
 import "./FireModal.css";
 import {getFireInfo} from '../redux/action/homepage';
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 class FireModal extends Component{
     constructor(props){
@@ -18,6 +19,7 @@ class FireModal extends Component{
     componentDidMount(){
         this.props.dispatch(getFireInfo())
             .then(() => {
+                console.log(this.props.homepage.getFireInfo)
                 if(!!this.props.homepage.getFireInfo){
                     this.setState({
                         fireInfo: this.props.homepage.getFireInfo
@@ -27,7 +29,6 @@ class FireModal extends Component{
     }
 
     render(){
-
         return(
             <div className="fireModal-content">
                 <h3>最火</h3>
@@ -48,7 +49,7 @@ class FireModal extends Component{
                         >
                             <List.Item.Meta
                                 avatar={<Avatar src={item.data.avatar} />}
-                                title={<a href={item.data.href}>{item.data.title}</a>}
+                                title={<Link to={`/news/info/${item._id}`}>{item.data.title}</Link>}
                                 description={item.data.description}
                             />
                             {item.data.content}

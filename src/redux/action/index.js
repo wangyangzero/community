@@ -69,4 +69,7 @@ export default KeyMirror({
     DELETE_USER_SUCCESS: null,
     DELETE_USER_FAILURE: null,
 
+    //获取留言信息
+    GET_USER_MESSAGE_SUCCESS: null,
+    GET_USER_MESSAGE_FAILURE: null,
 })

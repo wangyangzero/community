@@ -1,5 +1,5 @@
 import axios from 'axios';
-//import Qs from 'qs';
+import Qs from 'qs';
 import action from './index';
 import config from './common/config';
 

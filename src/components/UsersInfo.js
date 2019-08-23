@@ -51,17 +51,18 @@ class UsersInfo extends Component{
 	    					 <Typography>
 							    <Title level={4}>个人资料</Title> </Typography>
 							 <hr/>
-							<span ><img src={"https://i.loli.net/2019/04/06/5ca836d6cc365.jpg"} alt={"Github"} className={"logo2"}/> </span> 
-							<span className="UsersInfo_info"> <Descriptions title="" layout="horizontal" column={1}>
+							<div className="UsersInfo_photo"><img src={"https://i.loli.net/2019/04/06/5ca836d6cc365.jpg"} alt={"Github"} className={"logo2"}/> </div> 
+							<div className="UsersInfo_info"> <Descriptions title="" layout="horizontal" column={1}>
 									<Descriptions.Item label="ID">qq_42597258</Descriptions.Item>
 									</Descriptions>
+                                    <hr/>
 									<Descriptions>
 								    <Descriptions.Item label="昵称">Cloud Database</Descriptions.Item>
 								    <Descriptions.Item label="职业">Prepaid</Descriptions.Item>
 								    <Descriptions.Item label="地区">YES</Descriptions.Item>
-								    <Descriptions.Item label="简介">该吃吃该喝喝，遇事别往心里搁</Descriptions.Item>
+								    <Descriptions.Item label="简介">该吃吃该喝喝，遇事别往心里搁该吃吃该喝喝，遇事别往心里搁该吃吃该喝喝，遇事别往心里搁该吃吃该喝喝，遇事别往心里搁该吃吃该喝喝，遇事别往心里搁</Descriptions.Item>
 								    </Descriptions>
-							</span>
+							</div>
 					     </div>
     				</div>
     				<div className="UsersInfo_sidebar">
