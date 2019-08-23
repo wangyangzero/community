@@ -3,14 +3,14 @@
 }
 
 .homepage-content{
-    margin-left: 150px;
+    margin-left: 100px;
     margin-top: 10px;
-    width: 1000px;
+    width: 70%;
     display: inline-block;
 }
 
 .homepage-sideBar{
-    width: 220px;
+    width: 16%;
     float: right;
     margin-top: 12px;
     margin-right: 40px;

@@ -3,6 +3,7 @@ import {List, Avatar,Tag,Skeleton,} from 'antd';
 import "./NewModal.css";
 import {getNewInfo} from "../redux/action/homepage";
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
 
 class NewModal extends Component{
     constructor(props){
@@ -49,7 +50,7 @@ class NewModal extends Component{
                          <Skeleton avatar title={false} loading={item.data.loading} active>
                             <List.Item.Meta 
                                 avatar={<Avatar src={item.data.avatar} />}
-                                title={<a href={item.data.href}>{item.data.title}</a>}
+                                title={<Link to={`/news/info/${item._id}`}>{item.data.title}</Link>}
                                 description={<div>{item.data.description}&nbsp; &nbsp;
                                 </div>}
                             />

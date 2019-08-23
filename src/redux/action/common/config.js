@@ -1,3 +1,3 @@
 export default {
-    baseUrl:'http://localhost:8082'
+    baseUrl:'http://acm.swust.edu.cn/wy'
 }

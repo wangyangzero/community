@@ -4,6 +4,7 @@ import user from './user';
 import modal from './modal';
 import userInfo from './userInfo'
 import adminHome from './adminHome'
+import messageBoard from './messageBoard'
 
 export default combineReducers({
     homepage,
@@ -11,4 +12,5 @@ export default combineReducers({
     modal,
     userInfo,
     adminHome,
+    //messageBoard,
 });
