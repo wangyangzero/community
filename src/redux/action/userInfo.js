@@ -10,6 +10,8 @@ const {
     GET_USER_REGISTER_FAILURE,
     GET_USER_INFO_SUCCESS,
     GET_USER_INFO_FAILURE,
+    GET_MESSAGE_LIST_SUCCESS,
+    GET_MESSAGE_LIST_FAILURE,
 } = action;
 
 const baseUrl = config.baseUrl;
@@ -69,6 +71,24 @@ export function getUserInfo(token) {
             dispatch({
                 type: GET_USER_INFO_FAILURE,
                 error: error
+            })
+        }
+    }
+}
+
+export function getMsgList(){
+    return async (dispatch) => {
+        try{
+            const data=(await axios(`${baseUrl}/messageList`)).data;
+            dispatch({
+                type:GET_MESSAGE_LIST_SUCCESS,
+                data:data,
+            })
+        }
+        catch(error){
+            dispatch({
+                type:GET_MESSAGE_LIST_FAILURE,
+                error:new Error('获取留言列表失败'),
             })
         }
     }

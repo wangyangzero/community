@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {userRegister} from "../redux/action/userInfo";
+import {userRegister,getLoginStatus} from "../redux/action/userInfo";
 import connect from "react-redux/es/connect/connect";
 import {  Icon,Button, Form, Input,message} from 'antd';
 
@@ -21,7 +21,7 @@ class Register extends Component {
             password: data.password,
         })).then(()=>{
             if(!!this.props.userInfo){
-                this.handleRegisterSuccess(this.props.userInfo.userRegister);
+                this.handleRegisterSuccess(this.props.userInfo.userRegister,data);
                 this.setState({
                     registerStatus: this.props.userInfo.userRegister
                 })
@@ -34,12 +34,17 @@ class Register extends Component {
      * 注册成功
      * @param data
      */
-    handleRegisterSuccess = (data) => {
-        if(data.status === 200){
-            message.success(data.data);
-            setTimeout(()=> this.props.history.push('/'),500)
+    handleRegisterSuccess = (status,data) => {
+        if(status.status === 200){
+            this.props.dispatch(getLoginStatus({
+                username: data.username,
+                password: data.password,
+            })).then(()=>{
+                message.success(status.data);
+                setTimeout(()=> this.props.history.push('/'),500)
+            });
         } else{
-            message.error(data.error)
+            message.error(status.error)
         }
     };
 

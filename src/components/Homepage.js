@@ -4,11 +4,10 @@ import 'antd/dist/antd.css';
 import './Homepage.css'
 import HeadPage from './HeadPage'
 import Laboratory from './Laboratory'
-import MessageBoard from './MessageBoard'
 import FireModal from './FireModal'
 import NewModal from './NewModal'
 import {Link} from 'react-router-dom'
-import {getLoginStatus,getUserInfo} from "../redux/action/userInfo";
+import {getLoginStatus,getUserInfo,getMsgList} from "../redux/action/userInfo";
 import connect from "react-redux/es/connect/connect";
 
 
@@ -21,14 +20,23 @@ class Homepage extends Component{
             loginModal: false,
             confirmDirty: false,
             userInfo:'',
+            messageList: [],
         }
     }
 
     /**
      * 判断登录是否过期
-     *
+     * 获取留言板列表
      */
     componentDidMount(){
+        this.props.dispatch(getMsgList()).then(() =>{
+            console.log(this.props.userInfo.getMsgList)
+            if(!!this.props.userInfo.getMsgList){
+                this.setState({
+                    messageList: this.props.userInfo.getMsgList
+                })
+            }
+        });
         setInterval(()=>{
             if(localStorage.exp - Date.now() < 50 && localStorage.exp !== ''){
                 message.error('登录已过期请重新登录');
@@ -123,7 +131,10 @@ class Homepage extends Component{
 
 
     render(){
+        //form方法
         const { getFieldDecorator } = this.props.form;
+
+        //右上角图标
         const adminHome = localStorage.Authorization === '0' ? '' :
             <Menu.Item key='adminhome'>
                 <Link to='/admin/home'><span><Icon type="bank" />&nbsp;&nbsp;&nbsp;管理员中心</span></Link>
@@ -131,10 +142,10 @@ class Homepage extends Component{
         const menu = (
             <Menu onClick={this.loghome}>
                 <Menu.Item key='username'>
-                    <span><Icon type="user" />&nbsp;&nbsp;&nbsp;{localStorage.username}</span>
+                    <Link to='/'><span><Icon type="user" />&nbsp;&nbsp;&nbsp;{localStorage.username}</span></Link>
                 </Menu.Item>
                 <Menu.Item key='userhome'>
-                    <span><Icon type="home" />&nbsp;&nbsp;&nbsp;个人中心</span>
+                    <Link to='/user/home'><span><Icon type="home" />&nbsp;&nbsp;&nbsp;个人中心</span></Link>
                 </Menu.Item>
                 {adminHome}
                 <Menu.Item key='logout'>
@@ -142,39 +153,6 @@ class Homepage extends Component{
                 </Menu.Item>
             </Menu>
         );
-        const data = [
-            {
-                time: '2019/4/6',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88103c0bca.jpg",
-                content:"你也可以使用WaterFallList实现，看Readme和examples就知道了 ，还有效果图",
-            },
-            {
-                time: '2019/4/5',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88104017ab.jpg",
-                content:"初学者不要自己配置 开发环境, 直接从 expo开始, 这样会简单很多.",
-            },
-            {
-                time: '2019/4/4',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88104980da.jpg",
-                content:" 确实是jdk的版本关系，你echo %JAVA_HOME%看一下版本",
-            },
-            {
-                time: '2019/4/3',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca881051c6a7.jpg",
-                content:"你是怎么解决的,我试了很多次都不能成功",
-            },
-            {
-                time: '2019/4/2',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88294c3415.jpg",
-                content:"如何在android原生端获取到react native中的某个view",
-            },
-        ];
-
         let userModal = [];
         if(localStorage.token !== ''){
             userModal.push(
@@ -205,6 +183,19 @@ class Homepage extends Component{
             )
         }
 
+        //获取留言板列表
+        const data = [];
+        if(this.state.messageList.length > 0){
+            let msg = this.state.messageList;
+            for(let i = 0; i< msg.length; i++){
+                data.push({
+                    avatar: msg[i].avatar,
+                    date: msg[i].date,
+                    msg: msg[i].msg,
+                })
+            }
+        }
+
         return(
             <div className="homepage">
                 <div className="homepage-content">
@@ -213,19 +204,11 @@ class Homepage extends Component{
                             <HeadPage/>
                         </TabPane>
 
-{                        <TabPane tab={
-                            <span><Tooltip placement = "bottom" title={"留言"} >
-                        <span><Icon type="message" /></span>
-                        </Tooltip>
-                        </span>} key="2">
-                            <MessageBoard/>
-                        </TabPane>}
-
                         <TabPane tab={
                         <span><Tooltip placement = "bottom" title={"最新"} >
                         <span><Icon type="clock-circle" /></span>
                         </Tooltip>
-                        </span>} key="3">
+                        </span>} key="2">
                          <NewModal/> 
                         </TabPane>
 
@@ -233,7 +216,7 @@ class Homepage extends Component{
                         <span><Tooltip placement = "bottom" title={"热门"} >
                         <span><Icon type="fire" /></span>
                         </Tooltip>
-                        </span>} key="4">
+                        </span>} key="3">
                             <FireModal/>
                         </TabPane>
 
@@ -241,7 +224,7 @@ class Homepage extends Component{
                             <span><Tooltip placement = "bottom" title={"实验室"} >
                         <span><Icon type="home" /></span>
                         </Tooltip>
-                        </span>} key="5">
+                        </span>} key="4">
                             <Laboratory/>
                         </TabPane>}
                     </Tabs>
@@ -257,8 +240,8 @@ class Homepage extends Component{
                             <List.Item>
                                 <List.Item.Meta
                                     avatar={<Avatar src={item.avatar} />}
-                                    title={<a href={item.link}>{item.time}</a>}
-                                    description={item.content}
+                                    title={<span>{item.date}</span>}
+                                    description={item.msg}
                                 />
                             </List.Item>
                         )}

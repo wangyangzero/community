@@ -35,7 +35,7 @@ class User extends Component {
      */
     showUpdateUserModal = (record) => {
         this.props.form.setFieldsValue({
-            id: record.id,
+            id: record._id,
             Authorization: record.Authorization,
             username: record.username,
             nickname: record.nickname,
@@ -80,7 +80,7 @@ class User extends Component {
      */
     handleDeleteUser = (record) =>{
         this.props.dispatch(deleteUser({
-            id: record.id
+            id: record._id
         }));
         message.success('删除用户成功');
         setTimeout(()=>window.location.reload(),1000);
@@ -94,12 +94,12 @@ class User extends Component {
             for(let i = 0;i < userList.length;i++){
                 data.push({
                     id: i + 1,
-                    Authorization: userList.Authorization,
-                    username: userList.username,
-                    nickname: userList.nickname,
-                    password: userList.password,
-                    _id: userList._id,
-                    avatar: userList.avatar,
+                    Authorization: userList[i].Authorization,
+                    username: userList[i].username,
+                    nickname: userList[i].nickname,
+                    password: userList[i].password,
+                    _id: userList[i]._id,
+                    avatar: userList[i].avatar,
                 })
             }
         }

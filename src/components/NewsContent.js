@@ -1,85 +1,93 @@
 import React,{Component} from 'react';
 import './NewsContent.css';
-import { Typography, Divider,Avatar,Button,Descriptions,List} from 'antd';
+import {Typography, Avatar, List, Icon, Dropdown,Menu} from 'antd';
+import {getMsgList,getNewsInfo} from "../redux/action/homepage";
+import connect from 'react-redux/es/connect/connect'
+import {Link} from "react-router-dom";
 
-const { Title, Paragraph, Text} = Typography;
+const { Title, Paragraph} = Typography;
 class NewsContent extends Component{
     constructor(props){
         super(props);
         this.state = {
-         
+            messageList: [],
+			newsContent:'',
         }
     }
+    componentDidMount () {
+        this.props.dispatch(getMsgList()).then(() => {
+            if (!!this.props.homepage.getMsgList) {
+                this.setState({
+                    messageList: this.props.homepage.getMsgList
+                })
+            }
+        });
+        let hash = window.location.pathname.slice(11,window.location.pathname.length);
+        this.props.dispatch(getNewsInfo({
+			id: hash,
+		})).then(() => {
+			if(!!this.props.homepage.getNewsInfo){
+				this.setState({
+					newsContent: this.props.homepage.getNewsInfo.data,
+				})
+			}
+		})
+    }
     render(){
-    	   const data = [
-            {
-                time: '2019/4/6',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88103c0bca.jpg",
-                content:"你也可以使用WaterFallList实现，看Readme和examples就知道了 ，还有效果图",
-            },
-            {
-                time: '2019/4/5',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88104017ab.jpg",
-                content:"初学者不要自己配置 开发环境, 直接从 expo开始, 这样会简单很多.",
-            },
-            {
-                time: '2019/4/4',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88104980da.jpg",
-                content:" 确实是jdk的版本关系，你echo %JAVA_HOME%看一下版本",
-            },
-            {
-                time: '2019/4/3',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca881051c6a7.jpg",
-                content:"你是怎么解决的,我试了很多次都不能成功",
-            },
-            {
-                time: '2019/4/2',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88294c3415.jpg",
-                content:"如何在android原生端获取到react native中的某个view",
-            },
-        ];
+        //获取留言板列表
+        const data = [];
+        if(this.state.messageList.length > 0){
+            let msg = this.state.messageList;
+            for(let i = 0; i< msg.length; i++){
+                data.push({
+                    avatar: msg[i].avatar,
+                    date: msg[i].date,
+                    msg: msg[i].msg,
+                })
+            }
+        }
+
+        //获取右上角图标
+        const adminHome = localStorage.Authorization === '0' ? '' :
+            <Menu.Item key='adminhome'>
+                <Link to='/admin/home'><span><Icon type="bank" />&nbsp;&nbsp;&nbsp;管理员中心</span></Link>
+            </Menu.Item>;
+        const menu = (
+            <Menu onClick={this.loghome}>
+                <Menu.Item key='username'>
+                    <Link to='/'><span><Icon type="user" />&nbsp;&nbsp;&nbsp;{localStorage.username}</span></Link>
+                </Menu.Item>
+                <Menu.Item key='userhome'>
+                    <Link to='/user/home'><span><Icon type="home" />&nbsp;&nbsp;&nbsp;个人中心</span></Link>
+                </Menu.Item>
+                {adminHome}
+                <Menu.Item key='logout'>
+                    <span><Icon type="poweroff" />&nbsp;&nbsp;&nbsp;退出登录</span>
+                </Menu.Item>
+            </Menu>);
+        let userModal = [];
+        userModal.push(
+            <div className={"login"}>
+                <Dropdown overlay={menu} placement="bottomCenter" >
+                    <span><Avatar src={localStorage.avatar} icon="user" size="large" style={{marginLeft:'50px'}}/>&nbsp;欢迎回来</span>
+                </Dropdown>
+            </div>
+        );
+
     	return(
     			<div className="NewsContent">
     				<div className="NewsContent_content">
     				     <div  className="inner_content">
 	    					 <Typography>
-							    <Title level={2}>关于JavaScript数组方法三板斧，100%的开发都得知道</Title>
-							    <Paragraph>
-							      2019年08月18日&nbsp;&nbsp;14:44:55&nbsp;&nbsp;读芯术&nbsp;&nbsp;阅读数: 987
-							    </Paragraph>
+							    <Title level={2}>{this.state.newsContent.title}</Title>
+							    <Paragraph>{this.state.newsContent.date}</Paragraph>
 							    <hr/>
-							    <Paragraph>
-							    	5G和区块链是两种潜在的颠覆性技术，会塑造科技和电信的未来。预计到2020年，5G将覆盖全球。那么，5G技术加区块链，未来的世界会有什么改变呢？
-							    	<br /><br />
-       								 5G、区块链与物联网设备相连接，能为社会增添巨大价值。本文将简要介绍这些技术的好处、展现的可能性，以及必须要克服的挑战。
-
-									<br/><br />
-									<b>当物联网遇上5G技术和区块链</b>
-									<br /><br />
-
-									几年来，专家们早已注意到物联网的潜力。然而，两大瓶颈限制了它的发展：安全和容量。但如果连入5G网络，物联网设备就可以获得更加广泛的应用。
-
-									<br /><br />
-									<b>物联网需要高速度、低延迟的网络</b>
-
-									<br /><br />
-									延迟是指信号从发出到接收的时间间隔。低延迟对设备而言非常重要，可确保快速沟通，避免明显滞后。
-
-									<br /><br />
-									降低延迟对技能网(IoS)而言也非常关键，因为专家们需要使用虚拟现实耳机远程工作。要使技能网这一想法成真，低延迟的网络就尤为重要。
-
-									<br/><br />
-									较4G网络而言，5G网络传输数据的速度更快、延迟更少。因此，物联网能发挥最大潜能。
-							    </Paragraph>
+                                 {this.state.newsContent.content}
 						     </Typography>
 					     </div>
     				</div>
     				<div className="NewsContent_sidebar">
+                        {userModal}
     				     <div id={"upToDateMessage"}><h4 className={"homepage-sideBar-message"}>最新留言</h4></div>
 		                    <div className={"homepage-sideBar-userMessage"}>
 		                    <List
@@ -89,8 +97,8 @@ class NewsContent extends Component{
 		                            <List.Item>
 		                                <List.Item.Meta
 		                                    avatar={<Avatar src={item.avatar} />}
-		                                    title={<a href={item.link}>{item.time}</a>}
-		                                    description={item.content}
+		                                    title={<span>{item.date}</span>}
+		                                    description={item.msg}
 		                                />
 		                            </List.Item>
 		                        )}
@@ -102,4 +110,11 @@ class NewsContent extends Component{
     }
 
 }
+
+//组件和状态关联
+const mapStateToProps = state => {
+    return {homepage: state.homepage};
+};
+NewsContent = connect(mapStateToProps)(NewsContent);
+
 export default NewsContent;

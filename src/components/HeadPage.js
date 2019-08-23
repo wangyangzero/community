@@ -3,6 +3,7 @@ import {Avatar, Carousel, List, Tag} from 'antd';
 import './HeadPage.css';
 import {getTechnicalWeb,getFireInfo} from '../redux/action/homepage';
 import {connect} from 'react-redux'
+import {Link} from "react-router-dom";
 
 class HeadPage extends Component{
     constructor(props){
@@ -76,7 +77,7 @@ class HeadPage extends Component{
                             <List.Item>
                                 <List.Item.Meta
                                     avatar={<Avatar src={item.data.avatar}/>}
-                                    title={<b><a href="https://ant.design">{item.data.title}</a></b>}
+                                    title={<Link to={`/news/info/${item._id}`}>{item.data.title}</Link>}
                                     description={item.data.content}
                                 />
                             </List.Item>

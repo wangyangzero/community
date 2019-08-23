@@ -12,5 +12,5 @@ export default combineReducers({
     modal,
     userInfo,
     adminHome,
-    //messageBoard,
+    messageBoard,
 });

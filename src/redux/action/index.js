@@ -69,7 +69,19 @@ export default KeyMirror({
     DELETE_USER_SUCCESS: null,
     DELETE_USER_FAILURE: null,
 
-    //获取留言信息
+    //发送留言信息
     GET_USER_MESSAGE_SUCCESS: null,
     GET_USER_MESSAGE_FAILURE: null,
+
+    //获取留言信息
+    GET_USER_MESSAGE_LIST_SUCCESS: null,
+    GET_USER_MESSAGE_LIST_FAILURE: null,
+
+    //获取留言列表信息
+    GET_MESSAGE_LIST_SUCCESS: null,
+    GET_MESSAGE_LIST_FAILURE: null,
+
+    //获取新闻详细内容
+    GET_NEWS_INFO_SUCCESS: null,
+    GET_NEWS_INFO_FAILURE: null,
 })

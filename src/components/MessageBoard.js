@@ -1,109 +1,198 @@
 import React,{Component} from 'react';
-import { AutoComplete, Input,Avatar,Button,Icon,List,Skeleton,} from 'antd';
+import {Input, message, Button, Icon, Form, Typography, Descriptions, Avatar, List, Menu, Comment, Dropdown} from 'antd';
 import './MessageBoard.css';
-//import {getUserMsg} from '../redux/action/messageBoard'
+import {getUserMsg,getUserMsgList,getMsgList} from '../redux/action/messageBoard'
+import {Link} from 'react-router-dom'
+import connect from 'react-redux/es/connect/connect'
+
 const { TextArea } = Input;
-function onSelect(value) {
-  console.log('onSelect', value);
-}
+const { Title, } = Typography;
 
 class MessageBoard extends Component{
     constructor(props){
         super(props);
         this.state={
-          dataSource: [],
           msgInfo:[],
+            messageList: [],
         };
     };
-    /*
-componentDidMount (){
-  this.props.dispatch(getUserMsg({
-
-  })).then(() => {
-    if(!!this.props.messageBoard.getUserMsg){
-      this.setState({
-        msgInfo:this.props.messageBoard.getUserMsg
-      })
+    componentDidMount (){
+        this.props.dispatch(getMsgList()).then(() =>{
+            if(!!this.props.messageBoard.getMsgList){
+                this.setState({
+                    messageList: this.props.messageBoard.getMsgList
+                })
+            }
+        });
+        let nickname = localStorage.nickname;
+        this.props.dispatch(getUserMsgList({
+            nickname: nickname,
+        })).then(() => {
+            console.log(this.props.messageBoard.getUserMsgList);
+            if(!!this.props.messageBoard.getUserMsgList){
+                this.setState({
+                    msgInfo: this.props.messageBoard.getUserMsgList
+                })
+            }
+        })
     }
-  })
-}*/
-
-  handleSearch = value => {
-    this.setState({
-      dataSource: !value ? [] : [value, value + value, value + value + value],
-    });
-  };
-
-  handleKeyPress = ev => {
-    console.log('handleKeyPress', ev);
-  };
-
+    handleMsg = () =>{
+        let msg = this.props.form.getFieldsValue().msg;
+        let nickname = localStorage.nickname;
+        let avatar = localStorage.avatar;
+        if(msg === undefined){
+            message.error('留言内容不能为空');
+            return;
+        }
+        this.props.dispatch(getUserMsg({
+            msg: msg,
+            nickname: nickname,
+            avatar: avatar,
+        })).then(() =>{
+            message.success('留言成功');
+            setTimeout(()=>window.location.reload(),1000);
+        })
+    };
 
   render() {
-    const { dataSource } = this.state;
-     const data = [
-            {
-                time: '2019/4/6',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88103c0bca.jpg",
-                content:"你也可以使用WaterFallList实现，看Readme和examples就知道了 ，还有效果图",
-            },
-            {
-                time: '2019/4/5',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88104017ab.jpg",
-                content:"初学者不要自己配置 开发环境, 直接从 expo开始, 这样会简单很多.",
-            },
-            {
-                time: '2019/4/4',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88104980da.jpg",
-                content:" 确实是jdk的版本关系，你echo %JAVA_HOME%看一下版本",
-            },
-            {
-                time: '2019/4/3',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca881051c6a7.jpg",
-                content:"你是怎么解决的,我试了很多次都不能成功",
-            },
-            {
-                time: '2019/4/2',
-                link:"",
-                avatar:"https://i.loli.net/2019/04/06/5ca88294c3415.jpg",
-                content:"如何在android原生端获取到react native中的某个view",
-            },
-        ];
+      //form方法
+      const {getFieldDecorator} = this.props.form;
+
+      //获取留言板列表
+      const data = [];
+      if(this.state.messageList.length > 0){
+          let msg = this.state.messageList;
+          for(let i = 0; i< msg.length; i++){
+              data.push({
+                  avatar: msg[i].avatar,
+                  date: msg[i].date,
+                  msg: msg[i].msg,
+              })
+          }
+      }
+      //获取右上角图标
+      const adminHome = localStorage.Authorization === '0' ? '' :
+          <Menu.Item key='adminhome'>
+              <Link to='/admin/home'><span><Icon type="bank" />&nbsp;&nbsp;&nbsp;管理员中心</span></Link>
+          </Menu.Item>;
+      const menu = (
+          <Menu onClick={this.loghome}>
+              <Menu.Item key='username'>
+                  <Link to='/'><span><Icon type="user" />&nbsp;&nbsp;&nbsp;{localStorage.username}</span></Link>
+              </Menu.Item>
+              <Menu.Item key='userhome'>
+                  <Link to='/user/home'><span><Icon type="home" />&nbsp;&nbsp;&nbsp;个人中心</span></Link>
+              </Menu.Item>
+              {adminHome}
+              <Menu.Item key='logout'>
+                  <span><Icon type="poweroff" />&nbsp;&nbsp;&nbsp;退出登录</span>
+              </Menu.Item>
+          </Menu>);
+          let userModal = [];
+      userModal.push(
+          <div className={"login"}>
+              <Dropdown overlay={menu} placement="bottomCenter" >
+                  <span><Avatar src={localStorage.avatar} icon="user" size="large" style={{marginLeft:'50px'}}/>&nbsp;欢迎回来</span>
+              </Dropdown>
+          </div>
+      );
+
+      //评论
+      let comments = [];
+      if(this.state.msgInfo.length > 0){
+          let msgInfo = this.state.msgInfo;
+          for(let i = 0;i < msgInfo.length; i++){
+              comments.push(
+                  <Comment
+                      author={<span>{msgInfo[i].nickname}</span>}
+                      avatar={
+                          <Avatar
+                              src={msgInfo[i].avatar}
+                              alt={msgInfo[i].nickname}
+                          />
+                      }
+                      content={
+                          <p>{msgInfo[i].msg}</p>
+                      }
+                      datetime={
+                          <span>{msgInfo[i].date}</span>
+                      }/>);
+          }
+
+      }
+
     return (
+
       <div className="MessageBoard">
+          <div className="message-board-content">
+          <div  className="inner_content">
+              <Typography>
+                  <Title level={4}>个人资料</Title>
+              </Typography>
+              <hr/>
+              <div className="UsersInfo_photo"><img src={localStorage.avatar} className={"logo2"}/> </div>
+              <div className="UsersInfo_info"> <Descriptions title="" layout="horizontal" column={1}>
+                  <Descriptions.Item label="昵称">{localStorage.nickname}</Descriptions.Item>
+              </Descriptions>
+                  <hr/>
+                  <Descriptions>
+                      <Descriptions.Item label="用户名">{localStorage.username}</Descriptions.Item>
+                      <Descriptions.Item label="个签">{localStorage.message}</Descriptions.Item>
+                  </Descriptions>
+              </div>
+          </div>
                   <div className="MessageBoard-content">
                     <h3>留言</h3>
                           <div>
-                               <Avatar size={64} className={"message_photo"} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
-                                  <AutoComplete className={"text"} 
-                                    dataSource={dataSource}
-                                    style={{ width: 780 }}
-                                    onSelect={onSelect}
-                                    onSearch={this.handleSearch}
-                                  >
+                              <Form >
+                                  <Form.Item>
+                                      {getFieldDecorator('msg', {
+                                          rules: [{ required: true, message: '请输入留言内容!' }],
+                                      })(
                                     <TextArea
-                                      placeholder="input here"
+                                      placeholder="记录一下美好生活吧..."
                                       className="custom"
                                       style={{ height:160}}
-                                      onKeyPress={this.handleKeyPress}
                                     />
-                                    </AutoComplete> 
-                                     <Button type="primary" className='message-board-button'>
+                                      )}
+                                  </Form.Item>
+                              </Form>
+                                     <Button type="primary" className='message-board-button' onClick={this.handleMsg}>
                                       <Icon type="message" />
                                       发布
                                     </Button>
                            </div>
-                           <div>
-                               <p className='message-board-p'>2308条评论</p>
-                           </div>
+                      {comments}
                 </div>
-               
+          </div>
+          <div className="message-board-sidebar">
+              {userModal}
+              <div id={"upToDateMessage"}><h4 className={"homepage-sideBar-message"}>最新留言</h4></div>
+              <div className={"homepage-sideBar-userMessage"}>
+                  <List
+                      itemLayout="horizontal"
+                      dataSource={data}
+                      renderItem={item => (
+                          <List.Item>
+                              <List.Item.Meta
+                                  avatar={<Avatar src={item.avatar} />}
+                                  title={<span>{item.date}</span>}
+                                  description={item.msg}
+                              />
+                          </List.Item>
+                      )}
+                  />
+              </div>
+          </div>
       </div>
     );
   }
 }
-export default MessageBoard;
+
+//组件和状态关联
+const mapStateToProps = state => {
+    return {messageBoard: state.messageBoard};
+};
+MessageBoard = connect(mapStateToProps)(MessageBoard);
+
+export default Form.create()(MessageBoard);

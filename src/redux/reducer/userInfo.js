@@ -4,6 +4,7 @@ const {
     GET_LOGIN_STATUS_SUCCESS,
     GET_USER_REGISTER_SUCCESS,
     GET_USER_INFO_SUCCESS,
+    GET_MESSAGE_LIST_SUCCESS,
 } = actions;
 
 export default (state = {},action) => {
@@ -22,6 +23,11 @@ export default (state = {},action) => {
             return {
                 ...state,
                 getUserInfo: action.data
+            };
+        case GET_MESSAGE_LIST_SUCCESS:
+            return {
+                ...state,
+                getMsgList: action.data,
             };
         default:
             return state;

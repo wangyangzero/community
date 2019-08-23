@@ -3,19 +3,64 @@
     margin-top: 10px;
     width: 940px;
     display: inline-block;
-    background-color: #fff;
 }
 .MessageBoard-content h3 {
     font-weight: bold;
     color: #2C3E50;
     text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1),0 1px 3px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2),0 5px 10px rgba(0,0,0,0.25);
 }
-.message_photo{
-  margin: 60px 45px 0 45px;
+
+.MessageBoard{
+    background-color: ghostwhite;
 }
+
+.message-board-content{
+    width: 70%;
+    display: inline-block;
+}
+
+.message-board-sidebar{
+    width: 16%;
+    float: right;
+    margin-top: 12px;
+    margin-right: 40px;
+    display: inline-block;
+    background-color: snow;
+}
+
 .message-board-button{
-  margin: 20px 30px 0 850px;
+  margin: 1% 0 0 90%;
 }
 .message-board-p{
   margin: 0 0 0 150px;
+}
+
+.ant-form{
+    width: 88%;
+    margin-top: 5%;
+    margin-left: 12%;
+    display: inline-block;
+}
+
+.inner_content{
+    margin:10px 25px;
+    height: 200px;
+}
+
+.UsersInfo_photo{
+    display: inline-block;
+    width: 10%;
+    height: 45%;
+    float: left;
+}
+
+.UsersInfo_photo img{
+    width: 100%;
+    height: 100%;
+}
+
+.UsersInfo_info{
+    display: inline-block;
+    width: 80%;
+    margin-left: 5%;
 }
