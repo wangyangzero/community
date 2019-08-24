@@ -92,7 +92,6 @@ export function getMsgList(){
 
 export function getNewsInfo(query=''){
     return async (dispatch) => {
-        console.log(query)
         try{
             const data=(await axios.post(`${baseUrl}/news/check`,Qs.stringify(query))).data;
             dispatch({

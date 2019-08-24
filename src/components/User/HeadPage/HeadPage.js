@@ -1,7 +1,7 @@
 import React ,{Component} from 'react';
 import {Avatar, Carousel, List, Tag} from 'antd';
 import './HeadPage.css';
-import {getTechnicalWeb,getFireInfo} from '../redux/action/homepage';
+import {getTechnicalWeb,getFireInfo} from '../../../redux/action/homepage';
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
 
@@ -45,11 +45,11 @@ class HeadPage extends Component{
             let tags = [];
             for(let j = 0;j < this.state.technicalWeb[i].data.tag.length;j++){
                 tags.push(
-                    <Tag color={data[i].data.tag[j].tagColor}>{data[i].data.tag[j].tagName}</Tag>
+                    <Tag color={data[i].data.tag[j].tagColor} key={j}>{data[i].data.tag[j].tagName}</Tag>
                 )
             }
             webData.push(
-                <div id={"website" + key}><b><a href={data[i].data.href}>{data[i].data.name}</a></b>{tags}</div>
+                <div id={"website" + key} key={key}><b><a href={data[i].data.href}>{data[i].data.name}</a></b>{tags}</div>
             )
         }
 

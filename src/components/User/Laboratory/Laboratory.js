@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {List,Tag,Card,} from 'antd';
 import "./Laboratory.css";
-import {getLabInfo} from '../redux/action/modal';
+import {getLabInfo} from '../../../redux/action/modal';
 import {connect} from 'react-redux'
 
 class Laboratory extends Component{

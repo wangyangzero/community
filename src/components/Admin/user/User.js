@@ -5,7 +5,6 @@ import {getUserList,updateUserInfo,deleteUser} from '../../../redux/action/admin
 import {Button, Card, Table,Modal,Input,Form,message,Popconfirm} from 'antd'
 import {connect} from 'react-redux'
 
-const {TextArea} = Input;
 
 class User extends Component {
     constructor(props){
@@ -93,6 +92,7 @@ class User extends Component {
             let userList = this.state.userList;
             for(let i = 0;i < userList.length;i++){
                 data.push({
+                    key: i,
                     id: i + 1,
                     Authorization: userList[i].Authorization,
                     username: userList[i].username,

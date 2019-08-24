@@ -137,6 +137,7 @@ class FireModal extends Component {
             let fireInfo = this.state.fireInfo;
             for(let i = 0;i < fireInfo.length;i++){
                 data.push({
+                    key: i,
                     id: i + 1,
                     _id: fireInfo[i]._id,
                     href: fireInfo[i].data.href,

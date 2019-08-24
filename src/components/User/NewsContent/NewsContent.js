@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import './NewsContent.css';
-import {Typography, Avatar, List, Icon, Dropdown,Menu} from 'antd';
-import {getMsgList,getNewsInfo} from "../redux/action/homepage";
+import {Typography, Avatar, List, Icon, Dropdown, Menu, message} from 'antd';
+import {getMsgList,getNewsInfo} from "../../../redux/action/homepage";
 import connect from 'react-redux/es/connect/connect'
 import {Link} from "react-router-dom";
 
@@ -33,6 +33,24 @@ class NewsContent extends Component{
 			}
 		})
     }
+
+    /**
+     * 退出登录
+     * @param key 下拉框的key值
+     */
+    loghome = ({key})=>{
+        if(key === 'logout'){
+            message.success('您已退出登录');
+            this.props.history.push('/');
+            localStorage.token = '';
+            localStorage.id =  '';
+            localStorage.username = '';
+            localStorage.nickname = '';
+            localStorage.message = '';
+            localStorage.Authorization = '';
+            localStorage.exp = '';
+        }
+    };
     render(){
         //获取留言板列表
         const data = [];
@@ -66,13 +84,15 @@ class NewsContent extends Component{
                 </Menu.Item>
             </Menu>);
         let userModal = [];
-        userModal.push(
-            <div className={"login"}>
-                <Dropdown overlay={menu} placement="bottomCenter" >
-                    <span><Avatar src={localStorage.avatar} icon="user" size="large" style={{marginLeft:'50px'}}/>&nbsp;欢迎回来</span>
-                </Dropdown>
-            </div>
-        );
+        if(localStorage.token !== ''){
+            userModal.push(
+                <div className={"login"} key='login'>
+                    <Dropdown overlay={menu} placement="bottomCenter" >
+                        <span><Avatar src={localStorage.avatar} icon="user" size="large" style={{marginLeft:'50px'}}/>&nbsp;欢迎回来</span>
+                    </Dropdown>
+                </div>
+            );
+        }
 
     	return(
     			<div className="NewsContent">

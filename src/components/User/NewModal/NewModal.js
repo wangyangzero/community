@@ -1,15 +1,15 @@
 import React,{Component} from 'react';
-import {List, Avatar,Tag,} from 'antd';
-import "./FireModal.css";
-import {getFireInfo} from '../redux/action/homepage';
-import {connect} from 'react-redux'
+import {List, Avatar,Tag,Skeleton,} from 'antd';
+import "./NewModal.css";
+import {getNewInfo} from "../../../redux/action/homepage";
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 
-class FireModal extends Component{
+class NewModal extends Component{
     constructor(props){
         super(props);
         this.state={
-            fireInfo: [],
+            newInfo: [],
         }
     }
 
@@ -17,42 +17,44 @@ class FireModal extends Component{
      * 组件渲染完用于ajax请求
      */
     componentDidMount(){
-        this.props.dispatch(getFireInfo())
+        this.props.dispatch(getNewInfo())
             .then(() => {
-                console.log(this.props.homepage.getFireInfo)
-                if(!!this.props.homepage.getFireInfo){
+                if(!!this.props.homepage.getNewInfo){
                     this.setState({
-                        fireInfo: this.props.homepage.getFireInfo
+                        newInfo: this.props.homepage.getNewInfo
                     })
                 }
             })
     }
 
     render(){
+        
         return(
-            <div className="fireModal-content">
-                <h3>最火</h3>
+            <div className="NewModal-content">
+                <h3>最新</h3>
                 <List
                     itemLayout="vertical"
-                    size="large"
+                    size="small"
                     pagination={{
                         onChange: (page) => {
                             console.log(page);
                         },
-                        pageSize: 3,
+                        pageSize: 6,
                     }}
-                    dataSource={this.state.fireInfo}
+                    dataSource={this.state.newInfo}
                     renderItem={item => (
                         <List.Item
                             key={item.data.title}
                             extra={ <Tag color={item.data.tagColor}>{item.data.tag}</Tag>}
                         >
-                            <List.Item.Meta
+                         <Skeleton avatar title={false} loading={item.data.loading} active>
+                            <List.Item.Meta 
                                 avatar={<Avatar src={item.data.avatar} />}
                                 title={<Link to={`/news/info/${item._id}`}>{item.data.title}</Link>}
-                                description={item.data.description}
+                                description={<div>{item.data.description}&nbsp; &nbsp;
+                                </div>}
                             />
-                            {item.data.content}
+                              </Skeleton>
                         </List.Item>
                     )}
                 />
@@ -65,6 +67,6 @@ class FireModal extends Component{
 const mapStateToProps = state => {
     return {homepage: state.homepage};
 };
-FireModal = connect(mapStateToProps)(FireModal);
+NewModal = connect(mapStateToProps)(NewModal);
 
-export default FireModal;
+export default NewModal;

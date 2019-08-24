@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Input, message, Button, Icon, Form, Typography, Descriptions, Avatar, List, Menu, Comment, Dropdown} from 'antd';
 import './MessageBoard.css';
-import {getUserMsg,getUserMsgList,getMsgList} from '../redux/action/messageBoard'
+import {getUserMsg,getUserMsgList,getMsgList} from '../../../redux/action/messageBoard'
 import {Link} from 'react-router-dom'
 import connect from 'react-redux/es/connect/connect'
 
@@ -28,7 +28,6 @@ class MessageBoard extends Component{
         this.props.dispatch(getUserMsgList({
             nickname: nickname,
         })).then(() => {
-            console.log(this.props.messageBoard.getUserMsgList);
             if(!!this.props.messageBoard.getUserMsgList){
                 this.setState({
                     msgInfo: this.props.messageBoard.getUserMsgList
@@ -52,6 +51,24 @@ class MessageBoard extends Component{
             message.success('留言成功');
             setTimeout(()=>window.location.reload(),1000);
         })
+    };
+
+    /**
+     * 退出登录
+     * @param key 下拉框的key值
+     */
+    loghome = ({key})=>{
+        if(key === 'logout'){
+            message.success('您已退出登录');
+            this.props.history.push('/');
+            localStorage.token = '';
+            localStorage.id =  '';
+            localStorage.username = '';
+            localStorage.nickname = '';
+            localStorage.message = '';
+            localStorage.Authorization = '';
+            localStorage.exp = '';
+        }
     };
 
   render() {
@@ -89,13 +106,13 @@ class MessageBoard extends Component{
               </Menu.Item>
           </Menu>);
           let userModal = [];
-      userModal.push(
-          <div className={"login"}>
+      if(localStorage.token !== ''){userModal.push(
+          <div className={"login"} key='login'>
               <Dropdown overlay={menu} placement="bottomCenter" >
                   <span><Avatar src={localStorage.avatar} icon="user" size="large" style={{marginLeft:'50px'}}/>&nbsp;欢迎回来</span>
               </Dropdown>
           </div>
-      );
+      )}
 
       //评论
       let comments = [];
@@ -104,6 +121,7 @@ class MessageBoard extends Component{
           for(let i = 0;i < msgInfo.length; i++){
               comments.push(
                   <Comment
+                      key={i}
                       author={<span>{msgInfo[i].nickname}</span>}
                       avatar={
                           <Avatar
@@ -130,7 +148,7 @@ class MessageBoard extends Component{
                   <Title level={4}>个人资料</Title>
               </Typography>
               <hr/>
-              <div className="UsersInfo_photo"><img src={localStorage.avatar} className={"logo2"}/> </div>
+              <div className="UsersInfo_photo"><img src={localStorage.avatar} alt='头像加载失败' className={"logo2"}/> </div>
               <div className="UsersInfo_info"> <Descriptions title="" layout="horizontal" column={1}>
                   <Descriptions.Item label="昵称">{localStorage.nickname}</Descriptions.Item>
               </Descriptions>
@@ -141,29 +159,29 @@ class MessageBoard extends Component{
                   </Descriptions>
               </div>
           </div>
-                  <div className="MessageBoard-content">
-                    <h3>留言</h3>
-                          <div>
-                              <Form >
-                                  <Form.Item>
-                                      {getFieldDecorator('msg', {
-                                          rules: [{ required: true, message: '请输入留言内容!' }],
-                                      })(
-                                    <TextArea
+              <div className="MessageBoard-content">
+                  <h3>留言</h3>
+                  <div>
+                      <Form >
+                          <Form.Item>
+                              {getFieldDecorator('msg', {
+                                  rules: [{ required: true, message: '请输入留言内容!' }],
+                              })(
+                                  <TextArea
                                       placeholder="记录一下美好生活吧..."
                                       className="custom"
                                       style={{ height:160}}
                                     />
-                                      )}
-                                  </Form.Item>
-                              </Form>
-                                     <Button type="primary" className='message-board-button' onClick={this.handleMsg}>
-                                      <Icon type="message" />
-                                      发布
-                                    </Button>
-                           </div>
-                      {comments}
-                </div>
+                              )}
+                              </Form.Item>
+                      </Form>
+                      <Button type="primary" className='message-board-button' onClick={this.handleMsg}>
+                          <Icon type="message" />
+                          发布
+                      </Button>
+                  </div>
+                  {comments}
+                  </div>
           </div>
           <div className="message-board-sidebar">
               {userModal}

@@ -137,6 +137,7 @@ class NewModal extends Component {
             let newInfo = this.state.newInfo;
             for(let i = 0;i < newInfo.length;i++){
                 data.push({
+                    key: i,
                     id: i + 1,
                     _id: newInfo[i]._id,
                     href: newInfo[i].data.href,

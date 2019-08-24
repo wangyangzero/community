@@ -2,12 +2,12 @@ import React,{Component} from 'react';
 import {Tabs, Icon, Tooltip, Modal, Button, Form, Input, Checkbox, List, Avatar, message,Menu, Dropdown,} from 'antd';
 import 'antd/dist/antd.css';
 import './Homepage.css'
-import HeadPage from './HeadPage'
-import Laboratory from './Laboratory'
-import FireModal from './FireModal'
-import NewModal from './NewModal'
+import HeadPage from '../HeadPage/HeadPage'
+import Laboratory from '../Laboratory/Laboratory'
+import FireModal from '../FireModal/FireModal'
+import NewModal from '../NewModal/NewModal'
 import {Link} from 'react-router-dom'
-import {getLoginStatus,getUserInfo,getMsgList} from "../redux/action/userInfo";
+import {getLoginStatus,getUserInfo,getMsgList} from "../../../redux/action/userInfo";
 import connect from "react-redux/es/connect/connect";
 
 
@@ -30,11 +30,18 @@ class Homepage extends Component{
      */
     componentDidMount(){
         this.props.dispatch(getMsgList()).then(() =>{
-            console.log(this.props.userInfo.getMsgList)
             if(!!this.props.userInfo.getMsgList){
                 this.setState({
                     messageList: this.props.userInfo.getMsgList
                 })
+            }
+
+            //判断是否时刚注册
+            if(localStorage.registerStatus === 'true'){
+                this.setState({
+                    loginModal: true,
+                });
+                localStorage.registerStatus = false;
             }
         });
         setInterval(()=>{
@@ -156,7 +163,7 @@ class Homepage extends Component{
         let userModal = [];
         if(localStorage.token !== ''){
             userModal.push(
-                <div className={"login"}>
+                <div className="login" key='login'>
                     <Tooltip placement = "top" title={"fork me on the Github"} >
                         <a href={"https://github.com/LazyCaty/community"}>
                             <img src={"https://i.loli.net/2019/04/06/5ca836d6cc365.jpg"} alt={"Github"} className={"logo2"}/></a>
@@ -168,7 +175,7 @@ class Homepage extends Component{
             )
         } else{
             userModal.push(
-                <div className={"login"}>
+                <div className="login" key='logout'>
                     <Tooltip placement = "top" title={"fork me on the Github"} >
                         <a href={"https://github.com/LazyCaty/community"}>
                             <img src={"https://i.loli.net/2019/04/06/5ca836d6cc365.jpg"} alt={"Github"} className={"logo2"}/></a>
